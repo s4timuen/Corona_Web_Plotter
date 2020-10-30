@@ -4,7 +4,7 @@ Vue.config.devtools = true;
 Vue.component("country-selection", {
     props: {
         countries: {
-            type: Array,
+            type: [],
             required: true
         }
     },
@@ -19,10 +19,14 @@ Vue.component("country-selection", {
     methods: {
 
     },
-    // todo: generate checkboxes with labels
     template: `
-
-    `,
+    <div>
+        <div v-for="country in countries">
+            <input type="checkbox" id="country" :value="country" v-model="checkedCountries"></input>
+            <label for="country">{{ country }}</label>
+        </div>
+    </div>  
+    `
 });
 
 // display graphs component
@@ -47,10 +51,12 @@ Vue.component("graphs-section", {
         }
     },
     template: `
-    <div v-for="graph in graphs">
-        <div>{{ graph }}</div>
+    <div>
+        <div v-for="graph in graphs">
+            <!-- todo -->
+        </div>
     </div>
-    `,
+    `
 });
 
 // vue
@@ -58,7 +64,7 @@ var app = new Vue({
 
     el: "#app",
     data: {
-        jsonData: [],
+        jsonData: Object,
         countries: []
     },
     methods: {
@@ -70,17 +76,30 @@ var app = new Vue({
         const GET_DATA = new Promise(function() {
                         fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json")
                         .then(async function(response) { 
-
-                            this.jsonData = await response.json(); 
-                        }) 
+                            jsonData = await response.json(); }) 
                         .then(function() {
+                            for(var i = 0; i < Object.keys(jsonData).length; i++) { 
 
-                            for(var i = 0; i < Object.keys(this.jsonData).length; i++) {
-
-                                THIS.countries.push(Object.values(this.jsonData)[i].location);                                
+                                THIS.countries.push(Object.values(jsonData)[i].location);                                
                             }
                         })
                         .catch(error => { throw error; })
         });
     }
 });
+
+/** 
+ * todo:
+ * onSelect country checkbox -> add/remove graph
+ * plot graph
+ * * plot.ly? vue-chartjs?
+ * * extract data from object
+ * * etc.
+ * display graphs
+ * sessioning
+ * check if new data available and cach json (>40mb file)
+ * 
+ * change structure from singlefile
+ * 
+ * styling
+ */

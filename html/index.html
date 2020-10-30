@@ -9,14 +9,9 @@
 </head>
 
 <body>
-    <div id="app">
-        <div>
-            <country-selection></country-selection>
-        </div>
-
-        <div>
-            <graphs-section></graphs-section>
-        </div>
+    <div id="app">     
+        <country-selection :countries="countries"></country-selection>
+        <graphs-section></graphs-section>
     </div>
 
     <script src="../src/app.js"></script>
