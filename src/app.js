@@ -17,15 +17,18 @@ Vue.component("country-selection", {
 
     },
     methods: {
-
+        onSubmit: function() {
+            this.$emit("update-checked-countries", this.checkedCountries)
+        }
     },
     template: `
-    <div>
+    <form @submit.prevent="onSubmit">
         <div v-for="country in countries">
             <input type="checkbox" id="country" :value="country" v-model="checkedCountries"></input>
             <label for="country">{{ country }}</label>
         </div>
-    </div>  
+        <input type="submit" value="Submit"></input>
+    </form>  
     `
 });
 
@@ -34,6 +37,10 @@ Vue.component("graphs-section", {
     props: {
         jsonData: {
             type: Object,
+            required: true
+        },
+        checkedCountries: {
+            type: [],
             required: true
         }
     },
@@ -52,9 +59,7 @@ Vue.component("graphs-section", {
     },
     template: `
     <div>
-        <div v-for="graph in graphs">
-            <!-- todo -->
-        </div>
+        <script> console.log(test); </script>
     </div>
     `
 });
@@ -65,10 +70,14 @@ var app = new Vue({
     el: "#app",
     data: {
         jsonData: Object,
-        countries: []
+        countries: [],
+        checkedCountries: []
     },
     methods: {
-
+        updateCheckedCountries: function(checkedCountries) {
+            this.checkedCountries = checkedCountries;
+            console.log(this.checkedCountries);
+        }
     },
     mounted: function() {
         const THIS = this; 
@@ -90,7 +99,6 @@ var app = new Vue({
 
 /** 
  * todo:
- * onSelect country checkbox -> add/remove graph
  * plot graph
  * * plot.ly? vue-chartjs?
  * * extract data from object
@@ -99,7 +107,7 @@ var app = new Vue({
  * sessioning
  * check if new data available and cach json (>40mb file)
  * 
- * change structure from singlefile
+ * change structure from singlefile to VUE CLI 
  * 
  * styling
  */

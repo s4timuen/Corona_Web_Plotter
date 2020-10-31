@@ -10,8 +10,11 @@
 
 <body>
     <div id="app">     
-        <country-selection :countries="countries"></country-selection>
-        <graphs-section></graphs-section>
+        <country-selection :countries="countries" 
+            @update-checked-countries="updateCheckedCountries"></country-selection>
+        
+        <graphs-section :jsonData="jsonData"
+            :checkedCountries="checkedCountries"></graphs-section>
     </div>
 
     <script src="../src/app.js"></script>
