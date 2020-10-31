@@ -5,7 +5,7 @@
     <title>Corona Web Plotter</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://www.jsdelivr.com/package/npm/chart.js"></script>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
             @update-checked-countries="updateCheckedCountries"></country-selection>
         
         <graphs-section :jsonData="jsonData"
-            :checkedCountries="checkedCountries"></graphs-section>
+            :checked-countries="checkedCountries"></graphs-section>
     </div>
 
     <script src="../src/app.js"></script>

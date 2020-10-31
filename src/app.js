@@ -50,16 +50,52 @@ Vue.component("graphs-section", {
         }
     },
     computed: {
-
+       
+    },
+    watch: {
+        checkedCountries: function() {
+            this.plottCharts();
+        }
     },
     methods: {
-        plottGraphs: function() {
-            // todo
+        plottCharts: function() {
+
+            var charts = [];
+
+            // plot all charts
+            this.checkedCountries.forEach(function(countryName) {
+                
+                var dataToPlot;
+
+                // get single object to plot
+                this.jsonDataforEach(function(countryObject) {
+                    
+                    if(countryObject.location == countryName) {
+                        dataToPlot = countryObject;
+                    }
+                });
+
+                //todo
+
+                // plot single chart
+                // from current day data
+ 
+                // set context (canvasId)
+                var context = document.getElementById().getContext("2d");
+                var cahrt = new Chart(context, {
+                    type: "line"
+                });
+
+
+                charts.push(chart);
+            });
         }
     },
     template: `
     <div>
-        <script> console.log(test); </script>
+        <div v-for="chart in charts">
+            <canvas id="" width="200px" height="200px"></canvas>
+        </div>
     </div>
     `
 });
@@ -76,7 +112,6 @@ var app = new Vue({
     methods: {
         updateCheckedCountries: function(checkedCountries) {
             this.checkedCountries = checkedCountries;
-            console.log(this.checkedCountries);
         }
     },
     mounted: function() {
@@ -99,15 +134,8 @@ var app = new Vue({
 
 /** 
  * todo:
- * plot graph
- * * plot.ly? vue-chartjs?
- * * extract data from object
- * * etc.
- * display graphs
+ * plot and sisplay charts
  * sessioning
- * check if new data available and cach json (>40mb file)
- * 
- * change structure from singlefile to VUE CLI 
- * 
+ * check if new data available and cach json (>40mb file) 
  * styling
  */
