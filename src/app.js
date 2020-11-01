@@ -19,16 +19,24 @@ Vue.component("country-selection", {
     methods: {
         onSubmit: function() {
             this.$emit("update-checked-countries", this.checkedCountries)
+            localStorage.setItem("checkedCountries", JSON.stringify(this.checkedCountries));
+        }
+    },
+    mounted: function() {
+        if(localStorage.getItem("checkedCountries")) {
+            this.checkedCountries = JSON.parse(localStorage.getItem("checkedCountries"));
         }
     },
     template: `
     <form @submit.prevent="onSubmit">
-        <div v-for="country in countries">
-            <input type="checkbox" id="country" :value="country" v-model="checkedCountries"></input>
-            <label for="country">{{ country }}</label>
+        <div class="countrySelectionContainer" >
+            <div class="countrySelectionItem" v-for="country in countries">
+                <input type="checkbox" id="country" :value="country" v-model="checkedCountries"></input>
+                <label for="country">{{ country }}</label>
+            </div>
         </div>
-        <input type="submit" value="Submit"></input>
-    </form>  
+        <input class="submitButton" type="submit" value="Submit"></input>
+    </form> 
     `
 });
 
@@ -54,14 +62,14 @@ Vue.component("graphs-section", {
     },
     watch: {
         checkedCountries: function() {
-            this.plottCharts();
+            this.plotCharts();
         }
     },
     methods: {
-        plottCharts: function() {
+        plotCharts: function() {
 
             var charts = [];
-
+        
             // plot all charts
             this.checkedCountries.forEach(function(countryName) {
                 
@@ -75,14 +83,16 @@ Vue.component("graphs-section", {
                     }
                 });
 
-                //todo
+                // todo
+
+                // pre process data for plotting
 
                 // plot single chart
                 // from current day data
  
-                // set context (canvasId)
+                // set context (canvasId) -> dynamic id
                 var context = document.getElementById().getContext("2d");
-                var cahrt = new Chart(context, {
+                var chart = new Chart(context, {
                     type: "line"
                 });
 
@@ -93,9 +103,7 @@ Vue.component("graphs-section", {
     },
     template: `
     <div>
-        <div v-for="chart in charts">
-            <canvas id="" width="200px" height="200px"></canvas>
-        </div>
+        <p>{{ checkedCountries }}</p>
     </div>
     `
 });
@@ -134,8 +142,7 @@ var app = new Vue({
 
 /** 
  * todo:
- * plot and sisplay charts
- * sessioning
+ * plot and display charts
  * check if new data available and cach json (>40mb file) 
- * styling
+ * styling 
  */

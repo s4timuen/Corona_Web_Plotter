@@ -1,0 +1,21 @@
+.countrySelectionContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.countrySelectionItem {
+    width: 25%;
+    margin: 0px;
+    align-self: auto;
+}
+
+.submitButton {
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
+}
