@@ -19,3 +19,18 @@
     margin-left: 45%;
     margin-right: 45%;
 }
+
+.country-data-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.chart {
+    width: 10%;
+    height: 10%;
+}

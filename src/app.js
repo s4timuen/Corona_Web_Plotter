@@ -45,7 +45,8 @@ Vue.component("data-section", {
     props: {
         jsonData: {
             type: Object,
-            required: true
+            required: true,
+            default: {}
         },
         checkedCountries: {
             type: [],
@@ -54,28 +55,34 @@ Vue.component("data-section", {
     },
     data: function() {
         return {
-
+            lastUpdated: "never"
         }
     },
     computed: {
-       updateDay: function() {
-            //return Object.values(this.jsonData[0].data)[this.jsonData[0].data.length - 1].date;
-       }
+
+    },
+    methods: {
+        checkLastUpdated: function(lastUpdated) {
+            this.lastUpdated = lastUpdated;
+        }
     },
     template: `
     <div>
-        <p>Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST).</p>
-        <p>Data was last updatet: {{ updateDay }}</p>
-        <div v-for="country in checkedCountries">
-            <current-day-data :jsonData="jsonData"
-                :country="country"></current-day-data>
-            <chart></chart>
+        <div v-if="lastUpdated != 'never'">
+            <p>Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST).</p>
+            <p>Data has been updatet last: {{ lastUpdated }}</p>
+        </div>
+        <div class="country-data-container" v-for="country in checkedCountries">
+            <latest-day-data :jsonData="jsonData" :country="country"
+                @last-updated="checkLastUpdated"></latest-day-data>
+            <charts :jsonData="jsonData" :country="country"></charts>
         </div>
     </div>
     `
 });
 
-Vue.component("current-day-data", {
+// latest day data component
+Vue.component("latest-day-data", {
     props: {
         jsonData: {
             type: Object,
@@ -102,7 +109,7 @@ Vue.component("current-day-data", {
 
     },
     methods: {
-        currentDateData: function() {
+        latestDateData: function() {
 
             const THIS = this;
 
@@ -114,12 +121,12 @@ Vue.component("current-day-data", {
 
             var countryData;
 
-            // get single country object for plotting
-            for(var i = 0; i < Object.keys(jsonData).length; i++) {
+            // get single country object for data procession
+            for(var index = 0; index < Object.keys(jsonData).length; index++) {
 
-                if(Object.values(jsonData)[i].location == this.country) {
+                if(Object.values(jsonData)[index].location == this.country) {
 
-                    countryData = Object.values(jsonData)[i];
+                    countryData = Object.values(jsonData)[index];
                 }
             }
 
@@ -129,6 +136,8 @@ Vue.component("current-day-data", {
                 if((Object.values(countryData.data)[index].date == today) 
                     || (Object.values(countryData.data)[index].date == yesterday 
                     && !Object.values(countryData.data)[index + 1])) {  
+
+                    this.$emit("last-updated", Object.values(countryData.data)[index].date);
 
                     THIS.newCases = Object.values(countryData.data)[index].new_cases;
                     THIS.totalCases = Object.values(countryData.data)[index].total_cases;
@@ -143,11 +152,11 @@ Vue.component("current-day-data", {
         }
     },
     mounted: function() {
-        this.currentDateData();
+        this.latestDateData();
     },
     template: `
     <div>
-        <p>{{ this.country }}</p>
+        <p><b>{{ this.country }}</b></p>
         <p>New cases: {{ this.newCases }}</p>
         <p>Total cases: {{ this.totalCases }}</p>
         <p>New Deaths: {{ this.newDeaths }}</p>
@@ -160,34 +169,135 @@ Vue.component("current-day-data", {
     `
 });
 
-Vue.component("chart", {
+/**
+* only charts for: new cases, total cases, new detahs and total deaths are currently plotted
+* and only for the last 30 days
+* possibly more charts and options
+*/
+// charts section component
+Vue.component("charts", {
+    extends: VueChartJs.Line,
     props: {
-
+        jsonData: {
+            type: Object,
+            rewuired: true
+        },
+        country: {
+            type: String,
+            required: true
+        }
     },
     data: function() {
         return {
-            
+            ID: Object.freeze({
+                "ID_01": "new_cases",
+                "ID_02": "total_cases",
+                "ID_03": "new_deaths",
+                "ID_04": "total_deaths"
+            }),
+            OPTIONS: Object.freeze({
+                "DAYS_7": 8,
+                "DAYS_30": 31
+            })
         }
     },
     computed: {
 
     },
     methods: {
+        preprocessData(id) {
+           
+            var data = [];
+            var countryData;
+
+            // get data of respective country
+            for(var index = 0; index < Object.keys(jsonData).length; index++) {
+
+                if(Object.values(jsonData)[index].location == this.country) {
+
+                    countryData = Object.values(jsonData)[index];
+                }
+            }
+
+            // new cases
+            if(id == this.ID.ID_01) {
+                for(var index = countryData.data.length - 1; 
+                        index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+
+                    var entry = Object.values(countryData.data)[index].new_cases;
+                    data.push(entry);
+                }
+            }
+            // total cases
+            if(id == this.ID.ID_02) {
+                for(var index = countryData.data.length - 1; 
+                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+
+                var entry = Object.values(countryData.data)[index].new_cases;
+                data.push(entry);
+                }
+            }
+            // new deaths
+            if(id == this.ID.ID_03) {
+                for(var index = countryData.data.length - 1; 
+                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+
+                var entry = Object.values(countryData.data)[index].new_cases;
+                data.push(entry);
+                }
+            }
+            // total deaths
+            if(id == this.ID.ID_04) {
+                for(var index = countryData.data.length - 1; 
+                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+
+                var entry = Object.values(countryData.data)[index].new_cases;
+                data.push(entry);
+                }
+            }
+
+            return data;
+        },
         plotCharts: function() {
 
+            // plot chart
+            for(var index = 0; index < Object.keys(this.ID).length; index++) {
 
+                var chart = new Object;
 
-            // plot all charts
+                // new cases
+                if(index == 0) {
+                    chart.id = this.ID.ID_01;
+                    chart.data = this.preprocessData(chart.id);
 
-                
-                // pre process data for plotting
+                    this.renderChart(chart.data); 
+                }
+                // total cases
+                if(index == 1) {
+                    chart.id = this.ID.ID_02;
+                    chart.data = this.preprocessData(chart.id);
 
-                
-    
-                // plot charts
+                    this.renderChart(chart.data);
+                }
+                // new deaths
+                if(index == 2) {
+                    chart.id = this.ID.ID_03;
+                    chart.data = this.preprocessData(chart.id);
 
-      
+                    this.renderChart(chart.data);
+                }
+                // total deaths
+                if(index == 3) {
+                    chart.id = this.ID.ID_04;
+                    chart.data = this.preprocessData(chart.id);
+
+                    this.renderChart(chart.data);
+                }         
+            }
         }
+    },
+    mounted: function() {
+        this.plotCharts();
     },
     template: `
 
@@ -228,8 +338,8 @@ var app = new Vue({
 
 /** 
  * todo:
- * plot and display charts
- * check if new data available and cach json (>40mb file)
- * CLI 
+ * fix chart ploting
+ * chach json file (>40mb) -> check if new available 
  * styling 
+ * CLI 
  */
