@@ -20,7 +20,14 @@
     margin-right: 45%;
 }
 
-.country-data-container {
+.disabledButton {
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
+    background-color: #d8d8d8;
+}
+
+.countryDataContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -30,7 +37,8 @@
     align-content: flex-start;
 }
 
-.chart {
-    width: 10%;
-    height: 10%;
+.countryDataItem {
+    width: 50%;
+    margin: 0px;
+    align-self: auto;
 }

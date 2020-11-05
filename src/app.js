@@ -72,8 +72,8 @@ Vue.component("data-section", {
             <p>Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST).</p>
             <p>Data has been updatet last: {{ lastUpdated }}</p>
         </div>
-        <div class="country-data-container" v-for="country in checkedCountries">
-            <latest-day-data :jsonData="jsonData" :country="country"
+        <div class="countryDataContainer" v-for="country in checkedCountries">
+            <latest-day-data class="countryDataItem" :jsonData="jsonData" :country="country"
                 @last-updated="checkLastUpdated"></latest-day-data>
             <charts :jsonData="jsonData" :country="country"></charts>
         </div>
@@ -102,7 +102,7 @@ Vue.component("latest-day-data", {
             newCasesPerMillion: 0,
             totalCasesPerMillion: 0,
             newDeathsPerMillion: 0,
-            totalDeatchsPerMillion: 0,
+            totalDeathsPerMillion: 0,
         }
     },
     computed: {
@@ -146,7 +146,7 @@ Vue.component("latest-day-data", {
                     THIS.newCasesPerMillion = Object.values(countryData.data)[index].new_cases_per_million;
                     THIS.totalCasesPerMillion = Object.values(countryData.data)[index].total_cases_per_million;
                     THIS.newDeathsPerMillion = Object.values(countryData.data)[index].new_deaths_per_million;
-                    THIS.totalDeatchsPerMillion = Object.values(countryData.data)[index].total_deaths_per_million;
+                    THIS.totalDeathsPerMillion = Object.values(countryData.data)[index].total_deaths_per_million;
                 }
             }
         }
@@ -156,15 +156,15 @@ Vue.component("latest-day-data", {
     },
     template: `
     <div>
-        <p><b>{{ this.country }}</b></p>
-        <p>New cases: {{ this.newCases }}</p>
-        <p>Total cases: {{ this.totalCases }}</p>
-        <p>New Deaths: {{ this.newDeaths }}</p>
-        <p>Total Deaths: {{ this.totalDeaths }}</p>
-        <p>New cases per million: {{ this.newCasesPerMillion }}</p>
-        <p>Total cases per million: {{ this.totalCasesPerMillion }}</p>
-        <p>New deaths per million: {{ this.newDeathsPerMillion }}</p>
-        <p>Total cases per million: {{ this.totalDeatchsPerMillion }}</p>
+        <p><b>{{ country }}</b></p>
+        <p>New cases: {{ newCases }}</p>
+        <p>Total cases: {{ totalCases }}</p>
+        <p>New Deaths: {{ newDeaths }}</p>
+        <p>Total Deaths: {{ totalDeaths }}</p>
+        <p>New cases per million: {{ newCasesPerMillion }}</p>
+        <p>Total cases per million: {{ totalCasesPerMillion }}</p>
+        <p>New deaths per million: {{ newDeathsPerMillion }}</p>
+        <p>Total cases per million: {{ totalDeathsPerMillion }}</p>
     </div>
     `
 });
@@ -176,7 +176,6 @@ Vue.component("latest-day-data", {
 */
 // charts section component
 Vue.component("charts", {
-    extends: VueChartJs.Line,
     props: {
         jsonData: {
             type: Object,
@@ -222,10 +221,9 @@ Vue.component("charts", {
             // new cases
             if(id == this.ID.ID_01) {
                 for(var index = countryData.data.length - 1; 
-                        index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
 
-                    var entry = Object.values(countryData.data)[index].new_cases;
-                    data.push(entry);
+                    data.push(this.getLabelAndData(countryData.data[index], id));
                 }
             }
             // total cases
@@ -233,8 +231,7 @@ Vue.component("charts", {
                 for(var index = countryData.data.length - 1; 
                     index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
 
-                var entry = Object.values(countryData.data)[index].new_cases;
-                data.push(entry);
+                    data.push(this.getLabelAndData(countryData.data[index], id));
                 }
             }
             // new deaths
@@ -242,8 +239,7 @@ Vue.component("charts", {
                 for(var index = countryData.data.length - 1; 
                     index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
 
-                var entry = Object.values(countryData.data)[index].new_cases;
-                data.push(entry);
+                    data.push(this.getLabelAndData(countryData.data[index], id));
                 }
             }
             // total deaths
@@ -251,56 +247,119 @@ Vue.component("charts", {
                 for(var index = countryData.data.length - 1; 
                     index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
 
-                var entry = Object.values(countryData.data)[index].new_cases;
-                data.push(entry);
+                    data.push(this.getLabelAndData(countryData.data[index], id));
                 }
             }
 
+            data.reverse(data);
             return data;
+        },
+        getLabelAndData: function(dayData, id) {
+
+            var entry = {};
+            var key = dayData.date;
+            var value;
+
+            if(id == this.ID.ID_01) {
+                value = dayData.new_cases;
+            }
+            if(id == this.ID.ID_02) {
+                value = dayData.total_cases;
+            }
+            if(id == this.ID.ID_03) {
+                value = dayData.new_deaths;
+            }
+            if(id == this.ID.ID_04) {
+                value = dayData.total_deaths;
+            }
+
+            entry[key] = value;
+            return entry;
+        },
+        createChart: function(id, data, index) {
+
+            var labels = [];
+            var datasetData = [];
+
+            for(var index = 0; index < data.length; index++) {
+                labels.push(Object.keys(data[index]));
+                datasetData.push(Object.values(data[index]));
+            }
+
+            // chart
+            var context = document.getElementById(id).getContext('2d');
+            var myChart = new Chart(context, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: id,
+                        data: datasetData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
         },
         plotCharts: function() {
 
             // plot chart
             for(var index = 0; index < Object.keys(this.ID).length; index++) {
 
-                var chart = new Object;
+                var chartData = new Object;
 
                 // new cases
                 if(index == 0) {
-                    chart.id = this.ID.ID_01;
-                    chart.data = this.preprocessData(chart.id);
-
-                    this.renderChart(chart.data); 
+                    chartData.id = this.ID.ID_01;
+                    chartData.data = this.preprocessData(chartData.id);
+                    this.createChart(chartData.id, chartData.data);
                 }
                 // total cases
                 if(index == 1) {
-                    chart.id = this.ID.ID_02;
-                    chart.data = this.preprocessData(chart.id);
-
-                    this.renderChart(chart.data);
+                    chartData.id = this.ID.ID_02;
+                    chartData.data = this.preprocessData(chartData.id);
+                    this.createChart(chartData.id, chartData.data);
                 }
                 // new deaths
                 if(index == 2) {
-                    chart.id = this.ID.ID_03;
-                    chart.data = this.preprocessData(chart.id);
-
-                    this.renderChart(chart.data);
+                    chartData.id = this.ID.ID_03;
+                    chartData.data = this.preprocessData(chartData.id);
+                    this.createChart(chartData.id, chartData.data);
                 }
                 // total deaths
                 if(index == 3) {
-                    chart.id = this.ID.ID_04;
-                    chart.data = this.preprocessData(chart.id);
-
-                    this.renderChart(chart.data);
-                }         
+                    chartData.id = this.ID.ID_04;
+                    chartData.data = this.preprocessData(chartData.id);
+                    this.createChart(chartData.id, chartData.data);
+                }       
             }
         }
+        // IDs being overitten for multiple countries
     },
     mounted: function() {
         this.plotCharts();
     },
     template: `
-
+    <div class="countryDataItem">
+        <canvas id="new_cases"></canvas>
+        <canvas id="total_cases"></canvas>
+        <canvas id="new_deaths"></canvas>
+        <canvas id="total_deaths"></canvas>
+    </div>
     `
 });
 
@@ -338,8 +397,8 @@ var app = new Vue({
 
 /** 
  * todo:
- * fix chart ploting
- * chach json file (>40mb) -> check if new available 
- * styling 
- * CLI 
+ * debug:
+ *  * current day data not correctly updated 
+ *  * charts are overwritten -> dynamic IDs
+ * Vue.js CLI 
  */
