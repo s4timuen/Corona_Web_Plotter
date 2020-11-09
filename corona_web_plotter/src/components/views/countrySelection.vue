@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="onSubmit">
         <div class="countrySelectionContainer" >
-            <div class="countrySelectionItem" v-for="country in countries" :key="country">
+            <div class="countrySelectionItem" v-for="country in sortedCountryList" :key="country">
                 <input type="checkbox" :id="country" :value="country" v-model="checkedCountries"/>
                 <label for="country">{{ country }}</label>
             </div>
@@ -14,7 +14,7 @@
 export default {
     name: 'CountrySelection',
     components: {
-
+        
     },
     props: {
         countries: {
@@ -28,7 +28,10 @@ export default {
         }
     },
     computed: {
-
+        sortedCountryList: function() {
+            let sortedList = this.countries.slice(0).sort();
+            return sortedList;
+        }
     },
     methods: {
         onSubmit: function() {
@@ -58,6 +61,12 @@ export default {
 .countrySelectionItem {
     width: 25%;
     margin: 0px;
-    align-self: auto;
+    display: flex;
+}
+
+.submitButton {
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
 }
 </style>

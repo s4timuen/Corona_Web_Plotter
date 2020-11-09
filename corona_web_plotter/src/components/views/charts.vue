@@ -1,9 +1,17 @@
 <template>
-    <div class="countryDataItem">
-        <canvas :id="country + '_' + 'new_cases'"></canvas>
-        <canvas :id="country + '_' + 'total_cases'"></canvas>
-        <canvas :id="country + '_' + 'new_deaths'"></canvas>
-        <canvas :id="country + '_' + 'total_deaths'"></canvas>
+    <div class="chartsContainer">
+        <div class="chart">
+            <canvas :id="country + '_' + 'new_cases'"></canvas>
+        </div>
+        <div class="chart">
+            <canvas :id="country + '_' + 'total_cases'"></canvas>
+        </div>
+        <div class="chart">
+            <canvas :id="country + '_' + 'new_deaths'"></canvas>
+        </div>
+        <div class="chart">
+            <canvas :id="country + '_' + 'total_deaths'"></canvas>
+        </div>
     </div>
 </template>
 
@@ -36,7 +44,8 @@ export default {
             OPTIONS: Object.freeze({
                 "DAYS_7": 7,
                 "DAYS_30": 30
-            })
+            }), 
+            allDays: 0
         }
     },
     computed: {
@@ -124,7 +133,7 @@ export default {
                 labels.push(Object.keys(data[index]));
                 datasetData.push(Object.values(data[index]));
             }
-            
+
             let sortedDataset = datasetData.slice(0).sort((a, b) => a - b).reverse();
             let maxValue = sortedDataset[0];
 
@@ -202,16 +211,19 @@ export default {
 </script>
 
 <style lang="css">
-.submitButton {
-    width: 10%;
-    margin-left: 45%;
-    margin-right: 45%;
+.chartsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
 }
 
-.disabledButton {
-    width: 10%;
-    margin-left: 45%;
-    margin-right: 45%;
-    background-color: #d8d8d8;
+.chart {
+    width: 50%;
+    margin: 0px;
+    display: flex;
 }
 </style>

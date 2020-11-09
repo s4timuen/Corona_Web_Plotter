@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div>
+      <h1>Corona Web Plotter</h1>
+    </div>
     <CountrySelection :countries="countries" 
             @update-checked-countries="updateCheckedCountries"/>
         
@@ -20,7 +23,7 @@ export default {
   },
   data: function() {
     return {
-      jsonData: Object,
+      jsonData: {},
       countries: [],
       checkedCountries: []
     }
@@ -31,15 +34,16 @@ export default {
       }
   },
   mounted: function() {
-      // get data from web
+
       const THIS = this;
+      // get data from web
       new Promise(function() {
             fetch("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json")
             .then(async function(response) { 
-                THIS.jsonData = await response.json(); }) 
+                THIS.jsonData = await response.json(); 
+            })           
             .then(function() {
                 for(let index = 0; index < Object.keys(THIS.jsonData).length; index++) { 
-
                  THIS.countries.push(Object.values(THIS.jsonData)[index].location);                                
                 }
             })

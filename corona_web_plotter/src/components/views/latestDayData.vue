@@ -37,7 +37,7 @@ export default {
             newCasesPerMillion: 0,
             totalCasesPerMillion: 0,
             newDeathsPerMillion: 0,
-            totalDeathsPerMillion: 0,
+            totalDeathsPerMillion: 0
         }
     },
     computed: {
@@ -45,9 +45,6 @@ export default {
     },
     methods: {
         latestDateData: function() {
-
-            //on update checked countries only country name but not values updated
-
             const THIS = this;
 
             let today = new Date();
@@ -62,7 +59,7 @@ export default {
             for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
 
                 if(Object.values(this.jsonData)[index].location == this.country) {
-
+                    
                     countryData = Object.values(this.jsonData)[index];
                 }
             }
