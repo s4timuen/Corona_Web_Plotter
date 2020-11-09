@@ -1,14 +1,14 @@
 <template>
     <div class="countryDataItem">
-        <canvas id="new_cases"></canvas>
-        <canvas id="total_cases"></canvas>
-        <canvas id="new_deaths"></canvas>
-        <canvas id="total_deaths"></canvas>
+        <canvas :id="country + '_' + 'new_cases'"></canvas>
+        <canvas :id="country + '_' + 'total_cases'"></canvas>
+        <canvas :id="country + '_' + 'new_deaths'"></canvas>
+        <canvas :id="country + '_' + 'total_deaths'"></canvas>
     </div>
 </template>
 
 <script>
-import VueCharts from '../../../../node_modules/chart.js'
+import Chart from '../../../../node_modules/chart.js'
 
 export default {
     name: 'Charts',
@@ -124,10 +124,13 @@ export default {
                 labels.push(Object.keys(data[index]));
                 datasetData.push(Object.values(data[index]));
             }
+            
+            let sortedDataset = datasetData.slice(0).sort((a, b) => a - b).reverse();
+            let maxValue = sortedDataset[0];
 
             // chart
-            let context = document.getElementById(id).getContext('2d');
-            new VueCharts(context, {
+            let context = document.getElementById(this.country + "_" + id).getContext('2d');
+            new Chart(context, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -147,7 +150,9 @@ export default {
                     scales: {
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                suggestedMin: 0,
+                                suggestedMax: maxValue
                             }
                         }]
                     }
