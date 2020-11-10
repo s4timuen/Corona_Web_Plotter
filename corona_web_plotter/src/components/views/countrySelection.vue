@@ -14,7 +14,7 @@
 export default {
     name: 'CountrySelection',
     components: {
-        
+
     },
     props: {
         countries: {
@@ -24,7 +24,7 @@ export default {
     },
     data: function() {
         return {
-            checkedCountries: []
+
         }
     },
     computed: {
@@ -34,12 +34,14 @@ export default {
         }
     },
     methods: {
+        // plot charts button
         onSubmit: function() {
             this.$emit("update-checked-countries", this.checkedCountries)
             localStorage.setItem("checkedCountries", JSON.stringify(this.checkedCountries));
         }
     },
     mounted: function() {
+        // get preselection from local storage
         if(localStorage.getItem("checkedCountries")) {
             this.checkedCountries = JSON.parse(localStorage.getItem("checkedCountries"));
         }

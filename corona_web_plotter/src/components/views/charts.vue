@@ -1,16 +1,27 @@
 <template>
-    <div class="chartsContainer">
-        <div class="chart">
-            <canvas :id="country + '_' + 'new_cases'"></canvas>
+    <div>
+        <div>
+            <label for="days">Select how many days the charts should show: </label>
+            <select id="days" v-model="selectedOption">
+                <option v-for="option in options" :key="option">{{ option }}</option>
+            </select>
+            <button class="button" @click="onClick">
+                <span>Apply</span>
+            </button>
         </div>
-        <div class="chart">
-            <canvas :id="country + '_' + 'total_cases'"></canvas>
-        </div>
-        <div class="chart">
-            <canvas :id="country + '_' + 'new_deaths'"></canvas>
-        </div>
-        <div class="chart">
-            <canvas :id="country + '_' + 'total_deaths'"></canvas>
+        <div class="chartsContainer">
+            <div class="chart">
+                <canvas :id="country + '_' + 'new_cases'"></canvas>
+            </div>
+            <div class="chart">
+                <canvas :id="country + '_' + 'total_cases'"></canvas>
+            </div>
+            <div class="chart">
+                <canvas :id="country + '_' + 'new_deaths'"></canvas>
+            </div>
+            <div class="chart">
+                <canvas :id="country + '_' + 'total_deaths'"></canvas>
+            </div>
         </div>
     </div>
 </template>
@@ -41,18 +52,18 @@ export default {
                 "ID_03": "new_deaths",
                 "ID_04": "total_deaths"
             }),
-            OPTIONS: Object.freeze({
-                "DAYS_7": 7,
-                "DAYS_30": 30
-            }), 
-            allDays: 0
+            selectedOption: 30,
+            options: [7, 30] 
         }
     },
     computed: {
 
     },
-    methods: {
-        preprocessData(id) {
+    methods: {        
+        onClick: function() {
+            this.plotCharts(); 
+        },
+        preprocessData: function(id) {
            
             let data = [];
             let countryData;
@@ -69,7 +80,7 @@ export default {
             // new cases
             if(id == this.ID.ID_01) {
                 for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+                    index > countryData.data.length - this.selectedOption; index--) {  
 
                     data.push(this.getLabelAndData(countryData.data[index], id));
                 }
@@ -77,7 +88,7 @@ export default {
             // total cases
             if(id == this.ID.ID_02) {
                 for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+                    index > countryData.data.length - this.selectedOption; index--) { 
 
                     data.push(this.getLabelAndData(countryData.data[index], id));
                 }
@@ -85,7 +96,7 @@ export default {
             // new deaths
             if(id == this.ID.ID_03) {
                 for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+                    index > countryData.data.length - this.selectedOption; index--) { 
 
                     data.push(this.getLabelAndData(countryData.data[index], id));
                 }
@@ -93,7 +104,7 @@ export default {
             // total deaths
             if(id == this.ID.ID_04) {
                 for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.OPTIONS.DAYS_30; index--) { 
+                    index > countryData.data.length - this.selectedOption; index--) { 
 
                     data.push(this.getLabelAndData(countryData.data[index], id));
                 }
@@ -201,9 +212,18 @@ export default {
                 }       
             }
         }
-        // IDs being overitten for multiple countries
     },
     mounted: function() {
+        // get number of recorded days od specific country for select
+        for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
+
+            if(Object.values(this.jsonData)[index].location == this.country) {
+
+                this.options.push(Object.values(this.jsonData)[index].data.length); 
+            }
+        }
+
+        // plot charts
         this.plotCharts();
     },
     
@@ -225,5 +245,11 @@ export default {
     width: 50%;
     margin: 0px;
     display: flex;
+}
+
+.button {
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
 }
 </style>

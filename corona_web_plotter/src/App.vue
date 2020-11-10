@@ -7,7 +7,7 @@
             @update-checked-countries="updateCheckedCountries"/>
         
     <DataSection :jsonData="jsonData"
-            :checked-countries="checkedCountries"/>
+            :checkedCountries="checkedCountries"/>
   </div>
 </template>
 
@@ -33,8 +33,10 @@ export default {
           this.checkedCountries = checkedCountries;
       }
   },
-  mounted: function() {
+  computed: {
 
+  },
+  mounted: function() {
       const THIS = this;
       // get data from web
       new Promise(function() {
@@ -43,6 +45,7 @@ export default {
                 THIS.jsonData = await response.json(); 
             })           
             .then(function() {
+                // get countries
                 for(let index = 0; index < Object.keys(THIS.jsonData).length; index++) { 
                  THIS.countries.push(Object.values(THIS.jsonData)[index].location);                                
                 }
