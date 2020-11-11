@@ -1,25 +1,32 @@
 <template>
   <div id="app">
-    <div>
-      <h1>Corona Web Plotter</h1>
+    <div id="content">
+      <div>
+        <h1>Corona Web Plotter</h1>
+      </div>
+      <CountrySelection :countries="countries" 
+              @update-checked-countries="updateCheckedCountries"/>
+          
+      <DataSection :jsonData="jsonData"
+              :checkedCountries="checkedCountries"/>
     </div>
-    <CountrySelection :countries="countries" 
-            @update-checked-countries="updateCheckedCountries"/>
-        
-    <DataSection :jsonData="jsonData"
-            :checkedCountries="checkedCountries"/>
+    <div id="footer">
+      <Footer/>
+    </div>
   </div>
 </template>
 
 <script>
-import CountrySelection from '@/components/views/countrySelection.vue'
-import DataSection from '@/components/views/dataSection.vue'
+import CountrySelection from '@/components/views/countrySelection.vue';
+import DataSection from '@/components/views/dataSection.vue';
+import Footer from '@/components/views/footer.vue';
 
 export default {
   name: 'App',
   components: {
     CountrySelection,
-    DataSection
+    DataSection,
+    Footer
   },
   data: function() {
     return {
@@ -63,6 +70,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color:  whitesmoke;
   margin-top: 60px;
 }
 </style>

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Chart from '../../../../node_modules/chart.js'
+import Chart from '../../../../node_modules/chart.js';
 
 export default {
     name: 'Charts',
@@ -61,7 +61,7 @@ export default {
     },
     methods: {        
         onClick: function() {
-            this.plotCharts(); 
+            this.updateCharts(); 
         },
         preprocessData: function(id) {
            
@@ -181,10 +181,10 @@ export default {
         },
         plotCharts: function() {
 
-            // plot chart
+            // plot charts
             for(let index = 0; index < Object.keys(this.ID).length; index++) {
 
-                let chartData = new Object;
+                let chartData = {};
 
                 // new cases
                 if(index == 0) {
@@ -211,6 +211,68 @@ export default {
                     this.createChart(chartData.id, chartData.data);
                 }       
             }
+        },
+        updateCharts: function() {
+            
+            // update charts
+            for(let index = 0; index < Object.keys(this.ID).length; index++) {
+
+                // new cases
+                if(index == 0) {
+
+                    this.updateChartHelper(this.ID.ID_01);
+
+                }
+                // total cases
+                if(index == 1) {
+
+                    this.updateChartHelper(this.ID.ID_02);
+
+                }
+                // new deaths
+                if(index == 2) {
+   
+                    this.updateChartHelper(this.ID.ID_03);
+                }
+                // total deaths
+                if(index == 3) {
+            
+                    this.updateChartHelper(this.ID.ID_04);
+                }       
+            }
+        },
+        updateChartHelper: function(chartId) {
+
+            const THIS = this;
+
+            let chartData = {};
+            let labels = [];
+            let datasetData = [];
+            let chart;
+
+            // get chart
+            Chart.helpers.each(Chart.instances, function(instance) {
+                if(instance.chart.canvas.id == THIS.country + "_" + chartId) {
+                    chart = instance;
+                }
+            });
+
+            // update
+            chartData.id = chartId;
+            chartData.data = this.preprocessData(chartData.id);
+      
+            for(let index = 0; index < chartData.data.length; index++) {
+                labels.push(Object.keys(chartData.data[index]));
+                datasetData.push(Object.values(chartData.data[index]));
+            }
+
+            let sortedDataset = datasetData.slice(0).sort((a, b) => a - b).reverse();
+            let maxValue = sortedDataset[0];
+
+            chart.data.datasets[0].data = datasetData; 
+            chart.data.labels = labels; 
+            chart.options.scales.yAxes[0].ticks.suggestedMax = maxValue; 
+            chart.update();
         }
     },
     mounted: function() {
