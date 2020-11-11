@@ -10,8 +10,4 @@ Functions:
 * * with selection for how many days should be plotted
 
 ToDo:
-* option for how many days the charts should show [ X ]
-* * fix updating of charts [ X ]
-* favicon [ X ]
 * think about charts, that could be interesting [  ]
-* footer / site notice [ X ]

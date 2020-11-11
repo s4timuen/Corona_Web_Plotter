@@ -18,7 +18,7 @@ export default {
         return {
             name: "Tim Münzinger",
             address: "under the bridge",
-            city: "76137 Karlsruhe",
+            city: "90001 Los Angeles",
             phone: "123456789",
             mail: "tim.muenzinger@yahoo.de"
         }
