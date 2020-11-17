@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="data-section">
         <div v-if="lastUpdated != 'never'">
             <p>Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST)</p>
             <p>Data has been updatet last: {{ lastUpdated }}</p>
         </div>
-        <div class="countryDataContainer" v-for="country in checkedCountries" :key="country">
+        <div class="country-data-container" v-for="country in checkedCountries" :key="country">
             <LatestDayData :jsonData="jsonData" :country="country"
                 @last-updated="checkLastUpdated"/>
             <Charts :jsonData="jsonData" :country="country"/>
@@ -49,5 +49,12 @@ export default {
 </script>
 
 <style lang="css">
-
+.data-section {
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+.country-data-container {
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
 </style>

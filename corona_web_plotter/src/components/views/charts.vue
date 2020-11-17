@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="charts">
         <div>
             <label for="days">Select how many days the charts should show: </label>
             <select id="days" v-model="selectedOption">
@@ -9,7 +9,7 @@
                 <span>Apply</span>
             </button>
         </div>
-        <div class="chartsContainer">
+        <div class="charts-container">
             <div class="chart">
                 <canvas :id="country + '_' + 'new_cases'"></canvas>
             </div>
@@ -293,7 +293,12 @@ export default {
 </script>
 
 <style lang="css">
-.chartsContainer {
+.charts {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.charts-container {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -313,5 +318,7 @@ export default {
     width: 10%;
     margin-left: 45%;
     margin-right: 45%;
+    margin-top: 1%;
+    margin-bottom: 2%;
 }
 </style>

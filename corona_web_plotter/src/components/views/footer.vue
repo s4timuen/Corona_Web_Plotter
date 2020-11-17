@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <div class='impressum'>
+        <div class="site-notice">
             <h1>Site Notice</h1>
             <p>{{ name }} <br> {{ address }} <br> {{ city }} <br></p>
             <p> <strong>Contact: </strong> <br> Phone: {{ phone }} <br> E-Mail: <a href='mailto:tim.muenzinger@yahoo.de'>{{ mail }}</a> <br> </p>
@@ -28,6 +28,10 @@ export default {
 
 <style lang="css">
 .footer {
+    margin-top: 2%;
+}
+.site-notice {
     background-color: lightgray;
+    margin-top: 3%;
 }
 </style>

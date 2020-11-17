@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="last-day-data">
         <p><b>{{ country }}</b></p>
         <p>New cases: {{ newCases }}</p>
         <p>Total cases: {{ totalCases }}</p>
@@ -92,5 +92,8 @@ export default {
 </script>
 
 <style lang="css">
-
+.last-day-data {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
 </style>

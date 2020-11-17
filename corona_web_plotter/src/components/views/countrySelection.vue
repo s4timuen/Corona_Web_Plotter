@@ -1,12 +1,12 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <div class="countrySelectionContainer" >
-            <div class="countrySelectionItem" v-for="country in sortedCountryList" :key="country">
-                <input type="checkbox" :id="country" :value="country" v-model="checkedCountries"/>
-                <label for="country">{{ country }}</label>
+        <div class="country-selection-container" >
+            <div class="country-selection-item" v-for="country in sortedCountryList" :key="country">
+                <input class="checkbox" type="checkbox" :value="country" v-model="checkedCountries">
+                <label class="label" >{{ country }}</label>
             </div>
         </div>
-        <input class="submitButton" type="submit" value="Plot Charts"/>
+        <input class="submit-button" type="submit" value="Plot Charts"/>
     </form>   
 </template>
 
@@ -24,7 +24,7 @@ export default {
     },
     data: function() {
         return {
-
+            checkedCountries: []
         }
     },
     computed: {
@@ -36,7 +36,7 @@ export default {
     methods: {
         // plot charts button
         onSubmit: function() {
-            this.$emit("update-checked-countries", this.checkedCountries)
+            this.$emit("update-checked-countries", this.checkedCountries);
             localStorage.setItem("checkedCountries", JSON.stringify(this.checkedCountries));
         }
     },
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="css">
-.countrySelectionContainer {
+.country-selection-container {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -58,17 +58,28 @@ export default {
     align-items: stretch;
     justify-content: flex-start;
     align-content: flex-start;
+    margin-top: 3%;
 }
 
-.countrySelectionItem {
+.country-selection-item {
     width: 25%;
     margin: 0px;
     display: flex;
 }
 
-.submitButton {
+.submit-button {
     width: 10%;
     margin-left: 45%;
     margin-right: 45%;
+    margin-top: 2%;
+}
+
+.checkbox{
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.label {
+    margin-bottom: 0%;
 }
 </style>
