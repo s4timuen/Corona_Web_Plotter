@@ -3,8 +3,8 @@
         <div class="site-notice">
             <h1>Site Notice</h1>
             <p>{{ name }} <br> {{ address }} <br> {{ city }} <br></p>
-            <p> <strong>Contact: </strong> <br> Phone: {{ phone }} <br> E-Mail: <a href='mailto:tim.muenzinger@yahoo.de'>{{ mail }}</a> <br> </p>
-            </div>
+            <p> <strong>Contact: </strong> <br> Phone: {{ phone }} <br> E-Mail: <a href='mailto:tim.muenzinger@yahoo.de'>{{ mail }}</a></p>
+        </div>
     </div>
 </template>
 
@@ -28,10 +28,10 @@ export default {
 
 <style lang="css">
 .footer {
+    background-color: lightgray;
     margin-top: 2%;
 }
 .site-notice {
-    background-color: lightgray;
     margin-top: 3%;
 }
 </style>

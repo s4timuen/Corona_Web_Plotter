@@ -75,7 +75,7 @@ export default {
 }
 
 .checkbox{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-right: 2%;
 }
 

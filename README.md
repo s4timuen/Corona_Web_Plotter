@@ -11,3 +11,6 @@ Functions:
 
 ToDo:
 * think about charts, that could be interesting [  ]
+* cookies [  ]
+* localization [  ]
+* colour theme and styling [  ]
