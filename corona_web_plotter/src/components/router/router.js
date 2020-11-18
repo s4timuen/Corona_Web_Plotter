@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "@/components/views/home.vue";
-import Plotter from "@/components/views/plotter.vue";
+import Home from "@/components/views/home/home.vue";
+import Plotter from "@/components/views/plotter/plotter.vue";
 
 Vue.use(VueRouter);
 

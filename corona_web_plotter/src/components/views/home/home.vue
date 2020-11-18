@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Plotter',
+  name: 'Home',
   components: {
 
   },

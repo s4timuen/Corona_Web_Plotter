@@ -10,7 +10,6 @@ Functions:
 * * with selection for how many days should be plotted
 
 ToDo:
-* think about charts, that could be interesting [  ]
-* cookies [  ]
 * localization [  ]
 * colour theme and styling [  ]
+* think about charts, that could be interesting [  ]

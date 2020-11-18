@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Chart from '../../../../node_modules/chart.js';
+import Chart from '../../../../../node_modules/chart.js';
 
 export default {
     name: 'Charts',

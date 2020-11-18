@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import LatestDayData from '@/components/views/latestDayData.vue';
-import Charts from '@/components/views/charts.vue';
+import LatestDayData from '@/components/views/plotter/latestDayData.vue';
+import Charts from '@/components/views/plotter/charts.vue';
 
 export default {
-    name: 'DataSection',
+    name: "DataSection",
     components: {
         LatestDayData,
         Charts
