@@ -24,7 +24,7 @@ export default {
     return {
       jsonData: {},
       countries: []
-    }
+    };
   },
   methods: {
      
@@ -32,15 +32,17 @@ export default {
   computed: {
 
   },
-  mounted: function() {
+  watch: {
 
+  },
+  mounted: function() {
     const THIS = this;
     const SOURCE = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.json";
 
     // cookies
     if(!this.$cookies.isKey("cookies-accepted") || this.$cookies.get("cookies-accepted") == "false") { 
 
-      if(confirm("Do you accept the cookies?")) {
+      if(confirm(this.$t("app-cookies-question"))) { // not getting the locale -> Cannot translate the value of keypath 
         this.$cookies.set("cookies-accepted", "true", "30d");
       }
       else {

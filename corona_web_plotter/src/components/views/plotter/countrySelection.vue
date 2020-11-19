@@ -25,7 +25,7 @@ export default {
     data: function() {
         return {
             checkedCountries: []
-        }
+        };
     },
     computed: {
         sortedCountryList: function() {

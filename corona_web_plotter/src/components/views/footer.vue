@@ -1,9 +1,9 @@
 <template>
     <div class="footer">
         <div class="site-notice">
-            <h1>Site Notice</h1>
-            <p>{{ name }} <br> {{ address }} <br> {{ city }} <br></p>
-            <p> <strong>Contact: </strong> <br> Phone: {{ phone }} <br> E-Mail: <a href='mailto:tim.muenzinger@yahoo.de'>{{ mail }}</a></p>
+            <h1>{{ $t("footer-title") }}</h1>
+            <p>{{ $t("footer-name") }}<br>{{ $t("footer-address") }}<br>{{ $t("footer-city") }}<br></p>
+            <p><strong>{{ $t("footer-title-two") }}</strong><br>{{ $t("footer-phone") }}<br>{{ $t("footer-mail") }}<a href='mailto:tim.muenzinger@yahoo.de'>{{ $t("footer-mail-address") }}</a></p>
         </div>
     </div>
 </template>
@@ -16,12 +16,8 @@ export default {
     },
     data: function() {
         return {
-            name: "Tim Münzinger",
-            address: "under the bridge",
-            city: "90001 Los Angeles",
-            phone: "123456789",
-            mail: "tim.muenzinger@yahoo.de"
-        }
+
+        };
     }
 }
 </script>

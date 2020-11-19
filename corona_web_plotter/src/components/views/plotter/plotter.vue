@@ -1,7 +1,7 @@
 <template>
     <div class="plotter">
       <div>
-        <h1>Corona Web Plotter</h1>
+        <h1>{{ $t("plotter-title") }}</h1>
       </div>
       <CountrySelection :countries="countries" 
               @update-checked-countries="updateCheckedCountries"/>
@@ -34,7 +34,7 @@ export default {
   data: function() {
     return {
       checkedCountries: []
-    }
+    };
   },
   methods: {
       updateCheckedCountries: function(checkedCountries) {

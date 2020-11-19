@@ -1,8 +1,8 @@
 <template>
     <div class="data-section">
         <div v-if="lastUpdated != 'never'">
-            <p>Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST)</p>
-            <p>Data has been updatet last: {{ lastUpdated }}</p>
+            <p>{{ $t("data-section-update-time") }}</p>
+            <p>{{ $t("data-section-last-updated") + lastUpdated }}</p>
         </div>
         <div class="country-data-container" v-for="country in checkedCountries" :key="country">
             <LatestDayData :jsonData="jsonData" :country="country"
@@ -35,7 +35,7 @@ export default {
     data: function() {
         return {
             lastUpdated: "never"
-        }
+        };
     },
     computed: {
 

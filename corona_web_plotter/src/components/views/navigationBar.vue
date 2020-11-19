@@ -2,8 +2,11 @@
     <div class="navigation-bar">
         <div>
             |
-            <router-link to="/">Home</router-link> |
-            <router-link to="/plotter">Plotter</router-link> |
+            <router-link to="/">{{ $t("navigation-bar-home") }}</router-link> |
+            <router-link to="/plotter">{{ $t("navigation-bar-plotter") }}</router-link> |
+            <select v-model="$i18n.locale">
+                <option v-for="locale in locales" :key="locale" :value="locale">{{ locale }}</option>
+            </select> |
         </div>
     </div>
 </template>
@@ -16,8 +19,8 @@ export default {
     },
     data: function() {
         return {
-
-        }
+            locales: ["en", "de"]
+        };
     }
 }
 </script>

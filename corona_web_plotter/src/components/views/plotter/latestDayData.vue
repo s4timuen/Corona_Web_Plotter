@@ -1,14 +1,14 @@
 <template>
     <div class="last-day-data">
         <p><b>{{ country }}</b></p>
-        <p>New cases: {{ newCases }}</p>
-        <p>Total cases: {{ totalCases }}</p>
-        <p>New Deaths: {{ newDeaths }}</p>
-        <p>Total Deaths: {{ totalDeaths }}</p>
-        <p>New cases per million: {{ newCasesPerMillion }}</p>
-        <p>Total cases per million: {{ totalCasesPerMillion }}</p>
-        <p>New deaths per million: {{ newDeathsPerMillion }}</p>
-        <p>Total cases per million: {{ totalDeathsPerMillion }}</p>
+        <p>{{ $t("last-day-data-new-cases") + newCases }}</p>
+        <p>{{ $t("last-day-data-total-cases") + totalCases }}</p>
+        <p>{{ $t("last-day-data-new-deaths") + newDeaths }}</p>
+        <p>{{ $t("last-day-data-total-deaths") + totalDeaths }}</p>
+        <p>{{ $t("last-day-data-new-cases-per-million") + newCasesPerMillion }}</p>
+        <p>{{ $t("last-day-data-total-cases-per-million") + totalCasesPerMillion }}</p>
+        <p>{{ $t("last-day-data-new-deaths-per-million") + newDeathsPerMillion }}</p>
+        <p>{{ $t("last-day-data-total-deaths-per-million") + totalDeathsPerMillion }}</p>
     </div> 
 </template>
 
@@ -38,7 +38,7 @@ export default {
             totalCasesPerMillion: 0,
             newDeathsPerMillion: 0,
             totalDeathsPerMillion: 0
-        }
+        };
     },
     computed: {
 

@@ -1,7 +1,7 @@
 <template>
     <div class="charts">
         <div>
-            <label for="days">Select how many days the charts should show: </label>
+            <label for="days">{{ $t("charts-question-days") }}</label>
             <select id="days" v-model="selectedOption">
                 <option v-for="option in options" :key="option">{{ option }}</option>
             </select>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Chart from '../../../../../node_modules/chart.js';
+import Chart from 'chart.js';
 
 export default {
     name: 'Charts',
@@ -54,7 +54,7 @@ export default {
             }),
             selectedOption: 30,
             options: [7, 30] 
-        }
+        };
     },
     computed: {
 
