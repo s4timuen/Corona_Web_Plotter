@@ -42,7 +42,7 @@ export default {
     // cookies
     if(!this.$cookies.isKey("cookies-accepted") || this.$cookies.get("cookies-accepted") == "false") { 
 
-      if(confirm(this.$t("app-cookies-question"))) { // not getting the locale -> Cannot translate the value of keypath 
+      if(confirm(this.$t("app-cookies-question"))) { 
         this.$cookies.set("cookies-accepted", "true", "30d");
       }
       else {

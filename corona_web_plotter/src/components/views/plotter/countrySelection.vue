@@ -3,7 +3,8 @@
         <div class="country-selection-container" >
             <div class="country-selection-item" v-for="country in sortedCountryList" :key="country">
                 <input class="checkbox" type="checkbox" :value="country" v-model="checkedCountries">
-                <label class="label" >{{ country }}</label>
+                <label class="label" v-if="$te(country)">{{ $t(country) }}</label>
+                <label class="label" v-if="!$te(country)">{{ country }}</label>
             </div>
         </div>
         <input class="submit-button" type="submit" value="Plot Charts"/>
