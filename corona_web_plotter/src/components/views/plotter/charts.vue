@@ -6,7 +6,7 @@
                 <option v-for="option in options" :key="option">{{ option }}</option>
             </select>
             <button class="button" @click="onClick">
-                <span>Apply</span>
+                <span>{{ $t("charts-button") }}</span>
             </button>
         </div>
         <div class="charts-container">
@@ -53,11 +53,18 @@ export default {
                 "ID_04": "total_deaths"
             }),
             selectedOption: 30,
-            options: [7, 30] 
+            options: [7, 30]
         };
     },
-    computed: {
-
+    computed: { 
+        locale: function() { 
+            return this.$i18n.locale;
+        }
+    },
+    watch: {
+        locale: function() {
+            this.updateCharts();
+        }
     },
     methods: {        
         onClick: function() {
@@ -82,7 +89,7 @@ export default {
                 for(let index = countryData.data.length - 1; 
                     index > countryData.data.length - this.selectedOption; index--) {  
 
-                    data.push(this.getLabelAndData(countryData.data[index], id));
+                    data.push(this.getData(countryData.data[index], id));
                 }
             }
             // total cases
@@ -90,7 +97,7 @@ export default {
                 for(let index = countryData.data.length - 1; 
                     index > countryData.data.length - this.selectedOption; index--) { 
 
-                    data.push(this.getLabelAndData(countryData.data[index], id));
+                    data.push(this.getData(countryData.data[index], id));
                 }
             }
             // new deaths
@@ -98,7 +105,7 @@ export default {
                 for(let index = countryData.data.length - 1; 
                     index > countryData.data.length - this.selectedOption; index--) { 
 
-                    data.push(this.getLabelAndData(countryData.data[index], id));
+                    data.push(this.getData(countryData.data[index], id));
                 }
             }
             // total deaths
@@ -106,14 +113,14 @@ export default {
                 for(let index = countryData.data.length - 1; 
                     index > countryData.data.length - this.selectedOption; index--) { 
 
-                    data.push(this.getLabelAndData(countryData.data[index], id));
+                    data.push(this.getData(countryData.data[index], id));
                 }
             }
 
             data.reverse(data);
             return data;
         },
-        getLabelAndData: function(dayData, id) {
+        getData: function(dayData, id) {
 
             let entry = {};
             let key = dayData.date;
@@ -135,7 +142,28 @@ export default {
             entry[key] = value;
             return entry;
         },
+        getChartLabel: function(id) {
+
+            let chartLabel;
+
+            if(id == this.ID.ID_01) {
+                chartLabel = this.$t("charts-new-cases-label");
+            }
+            if(id == this.ID.ID_02) {
+                chartLabel = this.$t("cahrts-total-cases-label");
+            }
+            if(id == this.ID.ID_03) {
+                chartLabel = this.$t("charts-new-deaths-label");
+            }
+            if(id == this.ID.ID_04) {
+                chartLabel = this.$t("charts-total-deaths-label");
+            }
+
+            return chartLabel;
+        },
         createChart: function(id, data) {
+
+            let chartLabel = this.getChartLabel(id);
 
             let labels = [];
             let datasetData = [];
@@ -155,7 +183,7 @@ export default {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: id,
+                        label: chartLabel,
                         data: datasetData,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)'
@@ -250,6 +278,8 @@ export default {
             let datasetData = [];
             let chart;
 
+            let chartLabel = this.getChartLabel(chartId);
+
             // get chart
             Chart.helpers.each(Chart.instances, function(instance) {
                 if(instance.chart.canvas.id == THIS.country + "_" + chartId) {
@@ -269,6 +299,7 @@ export default {
             let sortedDataset = datasetData.slice(0).sort((a, b) => a - b).reverse();
             let maxValue = sortedDataset[0];
 
+            chart.data.datasets[0].label = chartLabel;
             chart.data.datasets[0].data = datasetData; 
             chart.data.labels = labels; 
             chart.options.scales.yAxes[0].ticks.suggestedMax = maxValue; 
@@ -276,6 +307,9 @@ export default {
         }
     },
     mounted: function() {
+
+        this.localeCheck = this.$i18n.locale;
+
         // get number of recorded days od specific country for select
         for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
 

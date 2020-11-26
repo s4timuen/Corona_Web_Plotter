@@ -31,6 +31,9 @@ export default {
 
 <style lang="css">
 .home {
+  width: 50%;
+  margin-right: 25%;
+  margin-left: 25%;
   margin-top: 2%;
   margin-bottom: 2%;
 }

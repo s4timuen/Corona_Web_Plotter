@@ -13,6 +13,8 @@ Functions:
 
 ToDo:
 
-* localization charts [  ]
+* localization buttons [ X ]
+* localization charts titles [ X ]
+* disable plot button till data is available [ X ]
 * colour theme and styling (bootstrap) [ ]
 * think about charts, that could be interesting [ ]

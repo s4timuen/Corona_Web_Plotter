@@ -18,6 +18,11 @@
     "home-annotation": "(Use the 'Plotter' link in the navigation bar to get to the Corona Web Plotter.)",
     
     "charts-question-days": "Select how many days the charts should show: ",
+    "charts-button": "Apply",
+    "charts-new-cases-label": "New cases",
+    "cahrts-total-cases-label": "Total cases",
+    "charts-new-deaths-label": "New deaths",
+    "charts-total-deaths-label": "Total deaths",
     
     "data-section-update-time": "Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST).",
     "data-section-last-updated": "Data has been updatet last: ", 
@@ -32,6 +37,8 @@
     "last-day-data-total-deaths-per-million": "Total deaths per million: ",
     
     "plotter-title": "Corona Web Plotter",
+
+    "country-selection-button": "Plot Charts",
 
     "Afghanistan": "Afghanistan",
     "Albania": "Albania",

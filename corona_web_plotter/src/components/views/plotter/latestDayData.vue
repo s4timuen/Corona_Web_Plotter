@@ -1,6 +1,6 @@
 <template>
     <div class="last-day-data">
-        <p><b>{{ country }}</b></p>
+        <p><b>{{ $t(country) }}</b></p>
         <p>{{ $t("last-day-data-new-cases") + newCases }}</p>
         <p>{{ $t("last-day-data-total-cases") + totalCases }}</p>
         <p>{{ $t("last-day-data-new-deaths") + newDeaths }}</p>

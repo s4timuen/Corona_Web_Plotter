@@ -7,7 +7,7 @@
                 <label class="label" v-if="!$te(country)">{{ country }}</label>
             </div>
         </div>
-        <input class="submit-button" type="submit" value="Plot Charts"/>
+        <input class="submit-button" type="submit" :value="localeButton" :disabled="!countries.length"/>
     </form>   
 </template>
 
@@ -32,6 +32,9 @@ export default {
         sortedCountryList: function() {
             let sortedList = this.countries.slice(0).sort();
             return sortedList;
+        },
+        localeButton: function() {
+            return this.$t("country-selection-button");
         }
     },
     methods: {
