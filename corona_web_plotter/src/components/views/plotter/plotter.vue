@@ -1,13 +1,18 @@
 <template>
-    <div class="plotter">
-      <div>
-        <h1>{{ $t("plotter-title") }}</h1>
+    <div id="plotter" class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+          <h1>{{ $t("plotter-title") }}</h1>
+        </div>
       </div>
-      <CountrySelection :countries="countries" 
+      <div class="row">
+        <CountrySelection class="col-xs-12" :countries="countries" 
               @update-checked-countries="updateCheckedCountries"/>
-            
-      <DataSection :jsonData="jsonData"
+      </div>
+      <div class="row">     
+        <DataSection class="col-xs-12" :jsonData="jsonData"
               :checkedCountries="checkedCountries"/>
+      </div>
     </div>
 </template>
 
@@ -51,8 +56,5 @@ export default {
 </script>
 
 <style lang="css">
-.plotter {
-  margin-top: 2%;
-  margin-bottom: 2%;
-}
+
 </style>

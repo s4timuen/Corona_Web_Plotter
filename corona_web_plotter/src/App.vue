@@ -1,12 +1,16 @@
 <template>
   <div id="app" class="container-fluid">
-    <NavigationBar/>
-    <div id="content">
-      <div>
+    <div class="row">
+      <NavigationBar class="col-xs-12 bg-dark text-light"/>
+    </div>  
+    <div class="row">
+      <div class="col-xs-12 bg-warning">
         <router-view :jsonData="jsonData" :countries="countries"></router-view>
       </div>
     </div>
-    <Footer/>
+    <div class="row">
+      <Footer class="col-xs-12 bg-dark text-light"/>
+    </div>
   </div>
 </template>
 
@@ -75,6 +79,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color:  whitesmoke;
 }
 </style>

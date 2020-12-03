@@ -1,13 +1,17 @@
 <template>
-    <div class="data-section">
-        <div v-if="lastUpdated != 'never'">
-            <p>{{ $t("data-section-update-time") }}</p>
-            <p>{{ $t("data-section-last-updated") + lastUpdated }}</p>
+    <div id="data-section" class="container-fluid">
+        <div class="row" v-if="lastUpdated != 'never'">
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("data-section-update-time") }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("data-section-last-updated") + lastUpdated }}</p>
+            </div>
         </div>
-        <div class="country-data-container" v-for="country in checkedCountries" :key="country">
-            <LatestDayData :jsonData="jsonData" :country="country"
+        <div class="row" v-for="country in checkedCountries" :key="country">
+            <LatestDayData class="col-xs-12" :jsonData="jsonData" :country="country"
                 @last-updated="checkLastUpdated"/>
-            <Charts :jsonData="jsonData" :country="country"/>
+            <Charts class="col-xs-12" :jsonData="jsonData" :country="country"/>
         </div>
     </div> 
 </template>
@@ -49,12 +53,5 @@ export default {
 </script>
 
 <style lang="css">
-.data-section {
-    margin-top: 3%;
-    margin-bottom: 1%;
-}
-.country-data-container {
-    margin-top: 3%;
-    margin-bottom: 1%;
-}
+
 </style>

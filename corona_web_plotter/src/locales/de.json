@@ -15,12 +15,12 @@
     
     "home-title": "Home",
     "home-information": "Mit dieser Web App können Sie aus verschiedenen Ländern auswählen, zu welchen Sie COVID-19 bezogene Datan angezeigt bekommen möchten. Nach dem Plotten der Daten werden die Daten für den aktuellen Tag, sowie Graphen, für welche Sie wählen können, ob Sie die letzten 7, 30 oder alle erhobenen Daten, für die gewählten Länder angezeigt. Die verwendeten Daten sind von https://github.com/owid/covid-19-data/tree/master/public/data.",
-    "home-annotation": "(Nutzen Sie dem 'Plotter' Link in der Navigationsleiste um tu dem Corona Web Plotter zu gelangen.)",
+    "home-annotation": "Bemerkung: Nutzen Sie den 'Plotter' Link in der Navigationsleiste um tu dem Corona Web Plotter zu gelangen.",
     
     "charts-question-days": "Wählen Sie, wie viele Tage die Graphen anzeigen sollen: ",
     "charts-button": "Anwenden",
     "charts-new-cases-label": "Neue Fälle",
-    "cahrts-total-cases-label": "Fälle insgesamt",
+    "charts-total-cases-label": "Fälle insgesamt",
     "charts-new-deaths-label": "Neue Tode",
     "charts-total-deaths-label": "Tode insgesamt",
     
@@ -38,7 +38,7 @@
     
     "plotter-title": "Corona Web Plotter",
 
-    "country-selection-button": "Graphen plotten",
+    "country-selection-button": "Plotten",
 
     "Afghanistan": "Afghanistan",
     "Albania": "Albanien",

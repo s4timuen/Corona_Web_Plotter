@@ -1,25 +1,29 @@
 <template>
-    <div class="charts">
-        <div>
-            <label for="days">{{ $t("charts-question-days") }}</label>
-            <select id="days" v-model="selectedOption">
-                <option v-for="option in options" :key="option">{{ option }}</option>
-            </select>
-            <button class="button" @click="onClick">
-                <span>{{ $t("charts-button") }}</span>
-            </button>
+    <div id="charts" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <label for="days">{{ $t("charts-question-days") }}</label>
+                <select id="days" v-model="selectedOption">
+                    <option v-for="option in options" :key="option">{{ option }}</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <button class="button" @click="onClick">
+                    <span>{{ $t("charts-button") }}</span>
+                </button>
+            </div>
         </div>
-        <div class="charts-container">
-            <div class="chart">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-6">
                 <canvas :id="country + '_' + 'new_cases'"></canvas>
             </div>
-            <div class="chart">
+            <div class="col-xs-12 col-md-12 col-lg-6">
                 <canvas :id="country + '_' + 'total_cases'"></canvas>
             </div>
-            <div class="chart">
+            <div class="col-xs-12 col-md-12 col-lg-6">
                 <canvas :id="country + '_' + 'new_deaths'"></canvas>
             </div>
-            <div class="chart">
+            <div class="col-xs-12 col-md-12 col-lg-6">
                 <canvas :id="country + '_' + 'total_deaths'"></canvas>
             </div>
         </div>
@@ -150,7 +154,7 @@ export default {
                 chartLabel = this.$t("charts-new-cases-label");
             }
             if(id == this.ID.ID_02) {
-                chartLabel = this.$t("cahrts-total-cases-label");
+                chartLabel = this.$t("charts-total-cases-label");
             }
             if(id == this.ID.ID_03) {
                 chartLabel = this.$t("charts-new-deaths-label");
@@ -327,32 +331,5 @@ export default {
 </script>
 
 <style lang="css">
-.charts {
-    margin-top: 0%;
-    margin-bottom: 0%;
-}
 
-.charts-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    align-content: flex-start;
-}
-
-.chart {
-    width: 50%;
-    margin: 0px;
-    display: flex;
-}
-
-.button {
-    width: 10%;
-    margin-left: 45%;
-    margin-right: 45%;
-    margin-top: 1%;
-    margin-bottom: 2%;
-}
 </style>

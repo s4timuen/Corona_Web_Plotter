@@ -1,14 +1,24 @@
 <template>
-    <form @submit.prevent="onSubmit">
-        <div class="country-selection-container" >
-            <div class="country-selection-item" v-for="country in sortedCountryList" :key="country">
-                <input class="checkbox" type="checkbox" :value="country" v-model="checkedCountries">
-                <label class="label" v-if="$te(country)">{{ $t(country) }}</label>
-                <label class="label" v-if="!$te(country)">{{ country }}</label>
+    <div id="country-selection" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <form @submit.prevent="onSubmit">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-lg-2 d-flex justify-content-start" v-for="country in sortedCountryList" :key="country">
+                            <input type="checkbox" :value="country" v-model="checkedCountries">
+                            <label v-if="$te(country)">{{ $t(country) }}</label>
+                            <label v-if="!$te(country)">{{ country }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 d-flex justify-content-center">
+                            <input class="submit-button" type="submit" :value="localeButton" :disabled="!countries.length"/>
+                        </div>
+                    </div>
+                </form> 
             </div>
-        </div>
-        <input class="submit-button" type="submit" :value="localeButton" :disabled="!countries.length"/>
-    </form>   
+        </div>  
+    </div>
 </template>
 
 <script>
@@ -54,36 +64,5 @@ export default {
 </script>
 
 <style lang="css">
-.country-selection-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    justify-content: flex-start;
-    align-content: flex-start;
-    margin-top: 3%;
-}
 
-.country-selection-item {
-    width: 25%;
-    margin: 0px;
-    display: flex;
-}
-
-.submit-button {
-    width: 10%;
-    margin-left: 45%;
-    margin-right: 45%;
-    margin-top: 2%;
-}
-
-.checkbox{
-    margin-top: 1%;
-    margin-right: 2%;
-}
-
-.label {
-    margin-bottom: 0%;
-}
 </style>

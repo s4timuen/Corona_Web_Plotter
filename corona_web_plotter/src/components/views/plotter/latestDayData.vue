@@ -1,14 +1,34 @@
 <template>
-    <div class="last-day-data">
-        <p><b>{{ $t(country) }}</b></p>
-        <p>{{ $t("last-day-data-new-cases") + newCases }}</p>
-        <p>{{ $t("last-day-data-total-cases") + totalCases }}</p>
-        <p>{{ $t("last-day-data-new-deaths") + newDeaths }}</p>
-        <p>{{ $t("last-day-data-total-deaths") + totalDeaths }}</p>
-        <p>{{ $t("last-day-data-new-cases-per-million") + newCasesPerMillion }}</p>
-        <p>{{ $t("last-day-data-total-cases-per-million") + totalCasesPerMillion }}</p>
-        <p>{{ $t("last-day-data-new-deaths-per-million") + newDeathsPerMillion }}</p>
-        <p>{{ $t("last-day-data-total-deaths-per-million") + totalDeathsPerMillion }}</p>
+    <div id="last-day-data" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <p><b>{{ $t(country) }}</b></p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-new-cases") + newCases }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-total-cases") + totalCases }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-new-deaths") + newDeaths }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-total-deaths") + totalDeaths }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-new-cases-per-million") + newCasesPerMillion }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-total-cases-per-million") + totalCasesPerMillion }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-new-deaths-per-million") + newDeathsPerMillion }}</p>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <p>{{ $t("last-day-data-total-deaths-per-million") + totalDeathsPerMillion }}</p>
+            </div>
+        </div>
     </div> 
 </template>
 
@@ -92,8 +112,5 @@ export default {
 </script>
 
 <style lang="css">
-.last-day-data {
-    margin-top: 0%;
-    margin-bottom: 0%;
-}
+
 </style>
