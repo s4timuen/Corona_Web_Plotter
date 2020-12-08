@@ -39,10 +39,6 @@ export default {
 
     },
     props: {
-        jsonData: {
-            type: Object,
-            required: true
-        },
         country: {
             type: String,
             required: true
@@ -76,11 +72,11 @@ export default {
             let countryData;
 
             // get single country object for data procession
-            for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
+            for(let index = 0; index < Object.keys(this.$store.getters.jsonData).length; index++) {
 
-                if(Object.values(this.jsonData)[index].location == this.country) {
+                if(Object.values(this.$store.getters.jsonData)[index].location == this.country) {
                     
-                    countryData = Object.values(this.jsonData)[index];
+                    countryData = Object.values(this.$store.getters.jsonData)[index];
                 }
             }
 

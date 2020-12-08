@@ -12,7 +12,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12 d-flex justify-content-center">
-                            <input class="submit-button" type="submit" :value="localeButton" :disabled="!countries.length"/>
+                            <input class="submit-button" type="submit" :value="localeButton" :disabled="!this.$store.getters.countries.length"/>
                         </div>
                     </div>
                 </form> 
@@ -27,12 +27,6 @@ export default {
     components: {
 
     },
-    props: {
-        countries: {
-            type: Array,
-            required: true
-        }
-    },
     data: function() {
         return {
             checkedCountries: []
@@ -40,7 +34,7 @@ export default {
     },
     computed: {
         sortedCountryList: function() {
-            let sortedList = this.countries.slice(0).sort();
+            let sortedList = this.$store.getters.countries.slice(0).sort();
             return sortedList;
         },
         localeButton: function() {

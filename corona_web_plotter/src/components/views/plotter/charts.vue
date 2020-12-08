@@ -39,10 +39,6 @@ export default {
 
     },  
     props: {
-        jsonData: {
-            type: Object,
-            rewuired: true
-        },
         country: {
             type: String,
             required: true
@@ -80,11 +76,11 @@ export default {
             let countryData;
 
             // get data of respective country
-            for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
+            for(let index = 0; index < Object.keys(this.$store.getters.jsonData).length; index++) {
 
-                if(Object.values(this.jsonData)[index].location == this.country) {
+                if(Object.values(this.$store.getters.jsonData)[index].location == this.country) {
 
-                    countryData = Object.values(this.jsonData)[index];
+                    countryData = Object.values(this.$store.getters.jsonData)[index];
                 }
             }
 
@@ -315,11 +311,11 @@ export default {
         this.localeCheck = this.$i18n.locale;
 
         // get number of recorded days od specific country for select
-        for(let index = 0; index < Object.keys(this.jsonData).length; index++) {
+        for(let index = 0; index < Object.keys(this.$store.getters.jsonData).length; index++) {
 
-            if(Object.values(this.jsonData)[index].location == this.country) {
+            if(Object.values(this.$store.getters.jsonData)[index].location == this.country) {
 
-                this.options.push(Object.values(this.jsonData)[index].data.length); 
+                this.options.push(Object.values(this.$store.getters.jsonData)[index].data.length); 
             }
         }
 

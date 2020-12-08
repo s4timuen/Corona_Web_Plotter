@@ -6,12 +6,10 @@
         </div>
       </div>
       <div class="row">
-        <CountrySelection class="col-xs-12" :countries="countries" 
-              @update-checked-countries="updateCheckedCountries"/>
+        <CountrySelection class="col-xs-12" @update-checked-countries="updateCheckedCountries"/>
       </div>
       <div class="row">     
-        <DataSection class="col-xs-12" :jsonData="jsonData"
-              :checkedCountries="checkedCountries"/>
+        <DataSection class="col-xs-12" :checkedCountries="checkedCountries"/>
       </div>
     </div>
 </template>
@@ -26,16 +24,6 @@ export default {
     CountrySelection,
     DataSection
   },
-    props: {
-      jsonData: {
-          type: Object,
-          required: true
-      },
-      countries: {
-          type: Array,
-          required: true
-      }
-    },
   data: function() {
     return {
       checkedCountries: []

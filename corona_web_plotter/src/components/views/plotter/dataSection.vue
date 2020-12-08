@@ -9,9 +9,9 @@
             </div>
         </div>
         <div class="row" v-for="country in checkedCountries" :key="country">
-            <LatestDayData class="col-xs-12" :jsonData="jsonData" :country="country"
+            <LatestDayData class="col-xs-12" :country="country"
                 @last-updated="checkLastUpdated"/>
-            <Charts class="col-xs-12" :jsonData="jsonData" :country="country"/>
+            <Charts class="col-xs-12" :country="country"/>
         </div>
     </div> 
 </template>
@@ -27,10 +27,6 @@ export default {
         Charts
     },
     props: {
-        jsonData: {
-            type: Object,
-            required: true
-        },
         checkedCountries: {
             type: Array,
             required: true

@@ -13,4 +13,5 @@ Functions:
 
 ToDo:
 
-* think about charts, that could be interesting [ ]
+* tests [  ]
+* think about charts, that could be interesting [  ]

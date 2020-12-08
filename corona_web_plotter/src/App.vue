@@ -5,7 +5,7 @@
     </div>  
     <div class="row">
       <div class="col-xs-12 bg-warning">
-        <router-view :jsonData="jsonData" :countries="countries"></router-view>
+        <router-view></router-view>
       </div>
     </div>
     <div class="row">
@@ -26,8 +26,7 @@ export default {
   },
   data: function() {
     return {
-      jsonData: {},
-      countries: []
+
     };
   },
   methods: {
@@ -58,12 +57,12 @@ export default {
     new Promise(function() {
       fetch(SOURCE)
       .then(async function(response) { 
-        THIS.jsonData = await response.json(); 
+        THIS.$store.commit('setJsonData', await response.json());
       })           
       .then(function() {
           // get countries
-          for(let index = 0; index < Object.keys(THIS.jsonData).length; index++) { 
-          THIS.countries.push(Object.values(THIS.jsonData)[index].location);                                
+          for(let index = 0; index < Object.keys(THIS.$store.getters.jsonData).length; index++) { 
+          THIS.$store.commit('addCountry', Object.values(THIS.$store.getters.jsonData)[index].location);                                
           }
       })
       .catch(error => { throw error; })
