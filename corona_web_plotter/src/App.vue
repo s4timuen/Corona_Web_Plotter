@@ -4,8 +4,10 @@
       <NavigationBar class="col-xs-12 bg-dark text-light"/>
     </div>  
     <div class="row">
-      <div class="col-xs-12 bg-warning">
-        <router-view></router-view>
+      <div class="content">
+        <div class="col-xs-12">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -78,5 +80,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.content {
+  background-color: lightgray;
 }
 </style>

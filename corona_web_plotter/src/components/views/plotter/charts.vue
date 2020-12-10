@@ -14,17 +14,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_cases'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'total_cases'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_deaths'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'total_deaths'"></canvas>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'new_cases_per_million'"></canvas>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'new_deaths_per_million'"></canvas>
             </div>
         </div>
     </div>
@@ -50,7 +56,9 @@ export default {
                 "ID_01": "new_cases",
                 "ID_02": "total_cases",
                 "ID_03": "new_deaths",
-                "ID_04": "total_deaths"
+                "ID_04": "total_deaths",
+                "ID_05": "new_cases_per_million",
+                "ID_06": "new_deaths_per_million"
             }),
             selectedOption: 30,
             options: [7, 30]
@@ -84,37 +92,11 @@ export default {
                 }
             }
 
-            // new cases
-            if(id == this.ID.ID_01) {
-                for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.selectedOption; index--) {  
+            // get list of respective data entries
+            for(let index = countryData.data.length - 1; 
+                index > countryData.data.length - this.selectedOption; index--) {  
 
-                    data.push(this.getData(countryData.data[index], id));
-                }
-            }
-            // total cases
-            if(id == this.ID.ID_02) {
-                for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.selectedOption; index--) { 
-
-                    data.push(this.getData(countryData.data[index], id));
-                }
-            }
-            // new deaths
-            if(id == this.ID.ID_03) {
-                for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.selectedOption; index--) { 
-
-                    data.push(this.getData(countryData.data[index], id));
-                }
-            }
-            // total deaths
-            if(id == this.ID.ID_04) {
-                for(let index = countryData.data.length - 1; 
-                    index > countryData.data.length - this.selectedOption; index--) { 
-
-                    data.push(this.getData(countryData.data[index], id));
-                }
+                data.push(this.getData(countryData.data[index], id));
             }
 
             data.reverse(data);
@@ -126,17 +108,25 @@ export default {
             let key = dayData.date;
             let value;
 
-            if(id == this.ID.ID_01) {
-                value = dayData.new_cases;
-            }
-            if(id == this.ID.ID_02) {
-                value = dayData.total_cases;
-            }
-            if(id == this.ID.ID_03) {
-                value = dayData.new_deaths;
-            }
-            if(id == this.ID.ID_04) {
-                value = dayData.total_deaths;
+            switch (id) {
+                case this.ID.ID_01:
+                    value = dayData.new_cases;
+                    break;
+                case this.ID.ID_02:
+                    value = dayData.total_cases;
+                    break;
+                case this.ID.ID_03:
+                    value = dayData.new_deaths;
+                    break;
+                case this.ID.ID_04:
+                    value = dayData.total_deaths;
+                    break;
+                case this.ID.ID_05:
+                    value = dayData.new_cases_per_million;
+                    break;
+                case this.ID.ID_06:
+                    value = dayData.new_deaths_per_million;
+                    break;
             }
 
             entry[key] = value;
@@ -146,17 +136,25 @@ export default {
 
             let chartLabel;
 
-            if(id == this.ID.ID_01) {
-                chartLabel = this.$t("charts-new-cases-label");
-            }
-            if(id == this.ID.ID_02) {
-                chartLabel = this.$t("charts-total-cases-label");
-            }
-            if(id == this.ID.ID_03) {
-                chartLabel = this.$t("charts-new-deaths-label");
-            }
-            if(id == this.ID.ID_04) {
-                chartLabel = this.$t("charts-total-deaths-label");
+            switch (id) {
+                case this.ID.ID_01:
+                    chartLabel = this.$t("charts-new-cases-label");
+                    break;
+                case this.ID.ID_02:
+                    chartLabel = this.$t("charts-total-cases-label");
+                    break;
+                case this.ID.ID_03:
+                    chartLabel = this.$t("charts-new-deaths-label");
+                    break;
+                case this.ID.ID_04:
+                    chartLabel = this.$t("charts-total-deaths-label");
+                    break;
+                case this.ID.ID_05:
+                    chartLabel = this.$t("charts-new-cases-per-million");
+                    break;
+                case this.ID.ID_06:
+                    chartLabel = this.$t("charts-new-deaths-per-million");
+                    break;
             }
 
             return chartLabel;
@@ -183,6 +181,7 @@ export default {
                 data: {
                     labels: labels,
                     datasets: [{
+                        lineTension: 0,
                         label: chartLabel,
                         data: datasetData,
                         backgroundColor: [
@@ -214,30 +213,29 @@ export default {
 
                 let chartData = {};
 
-                // new cases
-                if(index == 0) {
-                    chartData.id = this.ID.ID_01;
-                    chartData.data = this.preprocessData(chartData.id);
-                    this.createChart(chartData.id, chartData.data);
+                switch (index) {
+                    case 0: 
+                        chartData.id = this.ID.ID_01;
+                        break;
+                    case 1: 
+                        chartData.id = this.ID.ID_02;
+                        break;
+                    case 2: 
+                        chartData.id = this.ID.ID_03;
+                        break;
+                    case 3: 
+                        chartData.id = this.ID.ID_04;
+                        break;
+                    case 4: 
+                        chartData.id = this.ID.ID_05;
+                        break;
+                    case 5: 
+                        chartData.id = this.ID.ID_06;
+                        break;
                 }
-                // total cases
-                if(index == 1) {
-                    chartData.id = this.ID.ID_02;
-                    chartData.data = this.preprocessData(chartData.id);
-                    this.createChart(chartData.id, chartData.data);
-                }
-                // new deaths
-                if(index == 2) {
-                    chartData.id = this.ID.ID_03;
-                    chartData.data = this.preprocessData(chartData.id);
-                    this.createChart(chartData.id, chartData.data);
-                }
-                // total deaths
-                if(index == 3) {
-                    chartData.id = this.ID.ID_04;
-                    chartData.data = this.preprocessData(chartData.id);
-                    this.createChart(chartData.id, chartData.data);
-                }       
+
+                chartData.data = this.preprocessData(chartData.id);
+                this.createChart(chartData.id, chartData.data);
             }
         },
         updateCharts: function() {
@@ -245,28 +243,30 @@ export default {
             // update charts
             for(let index = 0; index < Object.keys(this.ID).length; index++) {
 
-                // new cases
-                if(index == 0) {
+                let id;
 
-                    this.updateChartHelper(this.ID.ID_01);
-
+                switch(index) {
+                    case 0: 
+                        id = this.ID.ID_01;
+                        break;
+                    case 1: 
+                        id = this.ID.ID_02;
+                        break;
+                    case 2: 
+                        id = this.ID.ID_03;
+                        break;
+                    case 3: 
+                        id = this.ID.ID_04;
+                        break;
+                    case 4: 
+                        id = this.ID.ID_05;
+                        break;
+                    case 5: 
+                        id = this.ID.ID_06;
+                        break;
                 }
-                // total cases
-                if(index == 1) {
 
-                    this.updateChartHelper(this.ID.ID_02);
-
-                }
-                // new deaths
-                if(index == 2) {
-   
-                    this.updateChartHelper(this.ID.ID_03);
-                }
-                // total deaths
-                if(index == 3) {
-            
-                    this.updateChartHelper(this.ID.ID_04);
-                }       
+                this.updateChartHelper(id);
             }
         },
         updateChartHelper: function(chartId) {
@@ -310,7 +310,7 @@ export default {
 
         this.localeCheck = this.$i18n.locale;
 
-        // get number of recorded days od specific country for select
+        // get number of recorded days of specific country for select
         for(let index = 0; index < Object.keys(this.$store.getters.jsonData).length; index++) {
 
             if(Object.values(this.$store.getters.jsonData)[index].location == this.country) {

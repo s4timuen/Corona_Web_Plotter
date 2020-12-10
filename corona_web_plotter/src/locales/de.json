@@ -23,6 +23,8 @@
     "charts-total-cases-label": "Fälle insgesamt",
     "charts-new-deaths-label": "Neue Tode",
     "charts-total-deaths-label": "Tode insgesamt",
+    "charts-new-cases-per-million": "Neue Fälle pro Millionen Einwohner",
+    "charts-new-deaths-per-million": "Neue Tode pro Millionen Einwohner",
     
     "data-section-update-time": "Die Daten werden täglich um etwa 11:00 UTC+1 (06:00 AM EST) aktualisiert.",
     "data-section-last-updated": "Die Daten wurden zuletzt aktualisiert am: ",
