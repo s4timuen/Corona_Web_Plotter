@@ -12,6 +12,7 @@
     
     "navigation-bar-home": "Home",
     "navigation-bar-plotter": "Plotter",
+    "navigation-bar-locale": "Sprache: ",
     
     "home-title": "Home",
     "home-information": "Mit dieser Web App können Sie aus verschiedenen Ländern auswählen, zu welchen Sie COVID-19 bezogene Datan angezeigt bekommen möchten. Nach dem Plotten der Daten werden die Daten für den aktuellen Tag, sowie Graphen, für welche Sie wählen können, ob Sie die letzten 7, 30 oder alle erhobenen Daten, für die gewählten Länder angezeigt. Die verwendeten Daten sind von https://github.com/owid/covid-19-data/tree/master/public/data.",

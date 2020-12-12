@@ -18,19 +18,19 @@
                 <canvas :id="country + '_' + 'new_cases'"></canvas>
             </div>
             <div class="col-xs-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'new_cases_per_million'"></canvas>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'total_cases'"></canvas>
             </div>
             <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_deaths'"></canvas>
             </div>
             <div class="col-xs-12 col-md-6 col-lg-4">
-                <canvas :id="country + '_' + 'total_deaths'"></canvas>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
-                <canvas :id="country + '_' + 'new_cases_per_million'"></canvas>
-            </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_deaths_per_million'"></canvas>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'total_deaths'"></canvas>
             </div>
         </div>
     </div>

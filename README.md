@@ -13,4 +13,4 @@ Functions:
 
 ToDo:
 
-
+* think about charts and key figures that could be inzteresting [  ] 

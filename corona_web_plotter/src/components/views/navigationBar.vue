@@ -8,7 +8,8 @@
                 <router-link to="/plotter">{{ $t("navigation-bar-plotter") }}</router-link>
             </div> 
             <div class="col-xs-1 col-md-4">
-                <select v-model="$i18n.locale">
+                <label for="locale">{{ $t("navigation-bar-locale") }}</label>
+                <select id="locale" v-model="$i18n.locale">
                     <option v-for="locale in locales" :key="locale" :value="locale">{{ locale }}</option>
                 </select> 
             </div> 
