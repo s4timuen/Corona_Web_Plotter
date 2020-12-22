@@ -2,13 +2,10 @@
     "app-cookies-question": "Akzeptieren Sie die Cookies?",
     
     "footer-title": "Impressum",
-    "footer-name": "Tim Münzinger",
-    "footer-address": "under the bridge",
-    "footer-city": "90001 Los Angeles",
-    "footer-title-two": "Kontakt: ",
-    "footer-phone": "Telefon: 123456789",
-    "footer-mail": "E-Mail: ",
+    "footer-description": "todo: add paragraph no site notice required",
+    "footer-mail": "Mail: ",
     "footer-mail-address": "tim.muenzinger@yahoo.de",
+
     
     "navigation-bar-home": "Home",
     "navigation-bar-plotter": "Plotter",
@@ -16,7 +13,7 @@
     
     "home-title": "Home",
     "home-information": "Mit dieser Web App können Sie aus verschiedenen Ländern auswählen, zu welchen Sie COVID-19 bezogene Datan angezeigt bekommen möchten. Nach dem Plotten der Daten werden die Daten für den aktuellen Tag, sowie Graphen, für welche Sie wählen können, ob Sie die letzten 7, 30 oder alle erhobenen Daten, für die gewählten Länder angezeigt. Die verwendeten Daten sind von https://github.com/owid/covid-19-data/tree/master/public/data.",
-    "home-annotation": "Bemerkung: Nutzen Sie den 'Plotter' Link in der Navigationsleiste um tu dem Corona Web Plotter zu gelangen.",
+    "home-annotation": "Bemerkung: Nutzen Sie den 'Plotter' Link in der Navigationsleiste um zu dem Corona Web Plotter zu gelangen.",
     
     "charts-question-days": "Wählen Sie, wie viele Tage die Graphen anzeigen sollen: ",
     "charts-button": "Anwenden",
@@ -26,8 +23,13 @@
     "charts-total-deaths-label": "Tode insgesamt",
     "charts-new-cases-per-million": "Neue Fälle pro Millionen Einwohner",
     "charts-new-deaths-per-million": "Neue Tode pro Millionen Einwohner",
+    "charts-new-tests-label": "Neue Tests",
+    "charts-total-tests-label": "Tests insgesamt",
+    "charts-new-test-per-thousand-label": "Neue Tests pro Tausend Einwohner",
+    "charts-total-tests-per-thousand-label": "Gesamte Tests pro Tausend Einwohner",
     
     "data-section-update-time": "Die Daten werden täglich um etwa 11:00 UTC+1 (06:00 AM EST) aktualisiert.",
+    "data-section-update-notice": "Es kann sein, dass nicht alle Daten Täglich erhoben werden (können).",
     "data-section-last-updated": "Die Daten wurden zuletzt aktualisiert am: ",
     
     "last-day-data-new-cases": "Neue Fälle: ",
@@ -38,6 +40,12 @@
     "last-day-data-total-cases-per-million": "Gesamte Fälle pro Millionen: ",
     "last-day-data-new-deaths-per-million": "Neue Tode pro Millionen: ",
     "last-day-data-total-deaths-per-million": "Gesamte Fälle pro Millionen: ",
+    "last-day-data-new-tests": "Neue Tests: ",
+    "last-day-data-total-test": "Tests insgesamt: ",
+    "last-day-data-new-tests-per-thousand": "Neue Tests pro Tausend: ",
+    "last-day-data-total-tests-per-thousand": "Gesamte Tests pro Tausend: ",
+    "last-day-data-positive-rate": "Rate positive Tests: ",
+    "last-day-data-test-per-case": "Tests pro Fall: ",
     
     "plotter-title": "Corona Web Plotter",
 

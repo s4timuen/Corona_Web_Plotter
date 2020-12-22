@@ -1,17 +1,20 @@
 <template>
     <div id="data-section" class="container-fluid">
         <div class="row" v-if="lastUpdated != 'never'">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("data-section-update-time") }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
+                <p>{{ $t("data-section-update-notice") }}</p>
+            </div>
+            <div class="col-12 col-md-12">
                 <p>{{ $t("data-section-last-updated") + lastUpdated }}</p>
             </div>
         </div>
         <div class="row" v-for="country in checkedCountries" :key="country">
-            <LatestDayData class="col-xs-12" :country="country"
+            <LatestDayData class="col-12" :country="country"
                 @last-updated="checkLastUpdated"/>
-            <Charts class="col-xs-12" :country="country"/>
+            <Charts class="col-12" :country="country"/>
         </div>
     </div> 
 </template>

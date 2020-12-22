@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueCookies from 'vue-cookies';
-import i18n from '@/locales/i18n.js';
+import i18n from '@/components/locales/i18n.js';
 import router from '@/components/router/router.js';
 import store from '@/components/store/store.js'
 

@@ -1,17 +1,17 @@
 <template>
   <div id="app" class="container-fluid">
     <div class="row">
-      <NavigationBar class="col-xs-12 bg-dark text-light"/>
+      <NavigationBar class="col-12 bg-dark text-light"/>
     </div>  
     <div class="row">
       <div class="content">
-        <div class="col-xs-12">
+        <div class="col-12">
           <router-view></router-view>
         </div>
       </div>
     </div>
     <div class="row">
-      <Footer class="col-xs-12 bg-dark text-light"/>
+      <Footer class="col-12 bg-dark text-light"/>
     </div>
   </div>
 </template>

@@ -1,36 +1,48 @@
 <template>
     <div id="charts" class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <label for="days">{{ $t("charts-question-days") }}</label>
                 <select id="days" v-model="selectedOption">
                     <option v-for="option in options" :key="option">{{ option }}</option>
                 </select>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <button class="button" @click="onClick">
                     <span>{{ $t("charts-button") }}</span>
                 </button>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_cases'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_cases_per_million'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'total_cases'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_deaths'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'new_deaths_per_million'"></canvas>
             </div>
-            <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="col-12 col-md-6 col-lg-4">
                 <canvas :id="country + '_' + 'total_deaths'"></canvas>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'new_tests'"></canvas>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'new_tests_per_thousand'"></canvas>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'total_tests'"></canvas>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <canvas :id="country + '_' + 'total_tests_per_thousand'"></canvas>
             </div>
         </div>
     </div>
@@ -58,7 +70,11 @@ export default {
                 "ID_03": "new_deaths",
                 "ID_04": "total_deaths",
                 "ID_05": "new_cases_per_million",
-                "ID_06": "new_deaths_per_million"
+                "ID_06": "new_deaths_per_million",
+                "ID_07": "new_tests", 
+                "ID_08": "total_tests", 
+                "ID_09": "new_tests_per_thousand", 
+                "ID_10": "total_tests_per_thousand" 
             }),
             selectedOption: 30,
             options: [7, 30]
@@ -127,6 +143,18 @@ export default {
                 case this.ID.ID_06:
                     value = dayData.new_deaths_per_million;
                     break;
+                case this.ID.ID_07:
+                    value = dayData.new_tests;
+                    break;
+                case this.ID.ID_08:
+                    value = dayData.total_tests;
+                    break;
+                case this.ID.ID_09:
+                    value = dayData.new_tests_per_thousand;
+                    break;
+                case this.ID.ID_10:
+                    value = dayData.total_tests_per_thousand;
+                    break;
             }
 
             entry[key] = value;
@@ -154,6 +182,18 @@ export default {
                     break;
                 case this.ID.ID_06:
                     chartLabel = this.$t("charts-new-deaths-per-million");
+                    break;
+                case this.ID.ID_07:
+                    chartLabel = this.$t("charts-new-tests-label");
+                    break;
+                case this.ID.ID_08:
+                    chartLabel = this.$t("charts-total-tests-label");
+                    break;
+                case this.ID.ID_09:
+                    chartLabel = this.$t("charts-new-test-per-thousand-label");
+                    break;
+                case this.ID.ID_10:
+                    chartLabel = this.$t("charts-total-tests-per-thousand-label");
                     break;
             }
 
@@ -232,6 +272,18 @@ export default {
                     case 5: 
                         chartData.id = this.ID.ID_06;
                         break;
+                    case 6: 
+                        chartData.id = this.ID.ID_07;
+                        break;
+                    case 7: 
+                        chartData.id = this.ID.ID_08;
+                        break;
+                    case 8: 
+                        chartData.id = this.ID.ID_09;
+                        break;
+                    case 9: 
+                        chartData.id = this.ID.ID_10;
+                        break;
                 }
 
                 chartData.data = this.preprocessData(chartData.id);
@@ -263,6 +315,18 @@ export default {
                         break;
                     case 5: 
                         id = this.ID.ID_06;
+                        break;
+                    case 6: 
+                        id = this.ID.ID_07;
+                        break;
+                    case 7: 
+                        id = this.ID.ID_08;
+                        break;
+                    case 8: 
+                        id = this.ID.ID_09;
+                        break;
+                    case 9: 
+                        id = this.ID.ID_10;
                         break;
                 }
 

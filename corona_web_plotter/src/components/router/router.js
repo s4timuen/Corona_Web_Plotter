@@ -7,8 +7,16 @@ import Plotter from "@/components/views/plotter/plotter.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', name: "Home", component: Home },
-  { path: '/plotter',name: "Plotter", component: Plotter }
+  { 
+    path: '/', 
+    name: "Home", 
+    component: Home 
+  },
+  { 
+    path: '/plotter',
+    name: "Plotter", 
+    component: Plotter 
+  }
 ];
 
 const router = new VueRouter({

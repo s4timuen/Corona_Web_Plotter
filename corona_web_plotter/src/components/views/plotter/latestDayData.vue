@@ -1,32 +1,50 @@
 <template>
     <div id="last-day-data" class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p><b>{{ $t(country) }}</b></p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-new-cases") + newCases }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-total-cases") + totalCases }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-new-deaths") + newDeaths }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-total-deaths") + totalDeaths }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-new-cases-per-million") + newCasesPerMillion }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-total-cases-per-million") + totalCasesPerMillion }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-new-deaths-per-million") + newDeathsPerMillion }}</p>
             </div>
-            <div class="col-xs-12 col-md-12">
+            <div class="col-12 col-md-12">
                 <p>{{ $t("last-day-data-total-deaths-per-million") + totalDeathsPerMillion }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-new-tests") + newTests }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-total-test") + totalTests }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-new-tests-per-thousand") + newTestsPerThousand }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-total-tests-per-thousand") + totalTestsPerThousand }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-positive-rate") + positiveRate }}</p>
+            </div>
+            <div class="col-12 col-md-12">
+                <p>{{ $t("last-day-data-test-per-case") + testsPerCase }}</p>
             </div>
         </div>
     </div> 
@@ -53,7 +71,13 @@ export default {
             newCasesPerMillion: 0,
             totalCasesPerMillion: 0,
             newDeathsPerMillion: 0,
-            totalDeathsPerMillion: 0
+            totalDeathsPerMillion: 0,
+            newTests: 0, 
+            totalTests: 0, 
+            newTestsPerThousand: 0, 
+            totalTestsPerThousand: 0, 
+            positiveRate: 0, 
+            testsPerCase: 0 
         };
     },
     computed: {
@@ -97,6 +121,12 @@ export default {
                     THIS.totalCasesPerMillion = Object.values(countryData.data)[index].total_cases_per_million;
                     THIS.newDeathsPerMillion = Object.values(countryData.data)[index].new_deaths_per_million;
                     THIS.totalDeathsPerMillion = Object.values(countryData.data)[index].total_deaths_per_million;
+                    THIS.newTests = Object.values(countryData.data)[index].new_tests;
+                    THIS.totalTests = Object.values(countryData.data)[index].total_tests;
+                    THIS.newTestsPerThousand = Object.values(countryData.data)[index].new_test_per_thousand;
+                    THIS.totalTestsPerThousand = Object.values(countryData.data)[index].total_tests_per_thousand;
+                    THIS.positiveRate = Object.values(countryData.data)[index].positive_rate;
+                    THIS.testsPerCase = Object.values(countryData.data)[index].test_per_case;
                 }
             }
         }

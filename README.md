@@ -1,3 +1,5 @@
+# corona_web_plotter
+
 A web app for displaying COVID-19 related data.
 
 Data source: https://github.com/owid/covid-19-data/tree/master/public/data
@@ -13,4 +15,4 @@ Functions:
 
 ToDo:
 
-* think about charts and key figures that could be inzteresting [  ] 
+* think about charts and key figures that could be interesting [  ] 

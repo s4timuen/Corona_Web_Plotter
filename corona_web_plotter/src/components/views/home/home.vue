@@ -1,13 +1,13 @@
 <template>
   <div id="home" class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <h1>{{ $t("home-title") }}</h1>
       </div>
-      <div class="col-xs-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <p>{{ $t("home-information") }}</p>
       </div>  
-      <div class="col-xs-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-info">
+      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-info">
         <p>{{ $t("home-annotation") }}</p>
       </div> 
     </div>

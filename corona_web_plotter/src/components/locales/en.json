@@ -2,12 +2,8 @@
     "app-cookies-question": "Do you accept the cookies?",
 
     "footer-title": "Site notice",
-    "footer-name": "Tim Münzinger",
-    "footer-address": "under the bridge",
-    "footer-city": "90001 Los Angeles",
-    "footer-title-two": "Contact: ",
-    "footer-phone": "Phone: 123456789",
-    "footer-mail": "E-Mail: ",
+    "footer-description": "todo: add paragraph no site notice required",
+    "footer-mail": "Mail: ",
     "footer-mail-address": "tim.muenzinger@yahoo.de",
 
     "navigation-bar-home": "Home",
@@ -26,8 +22,13 @@
     "charts-total-deaths-label": "Total deaths",
     "charts-new-cases-per-million": "New cases per million inhabitants",
     "charts-new-deaths-per-million": "New deaths per million inhabitants",
+    "charts-new-tests-label": "New tests",
+    "charts-total-tests-label": "Total tests ",
+    "charts-new-test-per-thousand-label": "New tests per thousand inhabitants",
+    "charts-total-tests-per-thousand-label": "Total tests per thousand inhabitants",
     
     "data-section-update-time": "Data is updatet daylie around 11:00 UTC+1 (06:00 AM EST).",
+    "data-section-update-notice": "It is possible, that not all data is (or can be) collected every day.",
     "data-section-last-updated": "Data has been updatet last: ", 
     
     "last-day-data-new-cases": "New cases: ",
@@ -38,6 +39,13 @@
     "last-day-data-total-cases-per-million": "Total cases per million: ",
     "last-day-data-new-deaths-per-million": "New deaths per million: ",
     "last-day-data-total-deaths-per-million": "Total deaths per million: ",
+    "last-day-data-new-tests": "New tests: ",
+    "last-day-data-total-test": "Total tests: ",
+    "last-day-data-new-tests-per-thousand": "New tests per thousand: ",
+    "last-day-data-total-tests-per-thousand": "Total tests per thousand: ",
+    "last-day-data-positive-rate": "Positive rate: ",
+    "last-day-data-test-per-case": "Tests per case: ",
+
     
     "plotter-title": "Corona Web Plotter",
 

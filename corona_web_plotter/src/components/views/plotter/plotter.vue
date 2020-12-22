@@ -1,15 +1,15 @@
 <template>
     <div id="plotter" class="container-fluid">
       <div class="row">
-        <div class="col-xs-12 col-md-12">
+        <div class="col-12 col-md-12">
           <h1>{{ $t("plotter-title") }}</h1>
         </div>
       </div>
       <div class="row">
-        <CountrySelection class="col-xs-12" @update-checked-countries="updateCheckedCountries"/>
+        <CountrySelection class="col-12" @update-checked-countries="updateCheckedCountries"/>
       </div>
       <div class="row">     
-        <DataSection class="col-xs-12" :checkedCountries="checkedCountries"/>
+        <DataSection class="col-12" :checkedCountries="checkedCountries"/>
       </div>
     </div>
 </template>
